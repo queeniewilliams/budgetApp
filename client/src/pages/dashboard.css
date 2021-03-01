@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: rgb(15, 21, 58);
+  margin: 20px;
+  height: 100vh;
+  border-radius: 50px;
+}
+.income {
+  grid-row: 2;
+  align-self: center;
+}
+.expense {
+  grid-row: 2/2;
+}
+.investment {
+  grid-row: 2/3;
+}
