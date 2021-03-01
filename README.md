@@ -45,6 +45,7 @@ _Hierarchy Diagram_
 - Build up files/contents structure & Layout
 
 _Home Page Layout_
+
 ![](https://i.ibb.co/5RVv4GD/p2.png)
 
 - Write methods for expense tracker
