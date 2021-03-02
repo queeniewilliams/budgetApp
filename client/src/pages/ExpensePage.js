@@ -6,13 +6,13 @@ export default class ExpensePage extends Component {
   constructor() {
     super()
     this.state = {
-      amount: '',
+      amount: null,
       description: '',
       date: '',
       totalSpend: [],
       totalBill: [],
       show: false,
-      expenses: ''
+      totalAmount: 0
     }
   }
 
@@ -34,16 +34,21 @@ export default class ExpensePage extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const newSpend = this.state.totalSpend
+    let newAmount = (
+      parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
+    ).toFixed(2)
     newSpend.push({
       amount: this.state.amount,
       description: this.state.description,
       date: this.state.date
     })
+    // this.setState({ totalAmount: newAmount })
     this.setState({
       amount: '',
       description: '',
       date: '',
-      totalSpend: newSpend
+      totalSpend: newSpend,
+      totalAmount: newAmount
     })
   }
   render() {
@@ -55,11 +60,9 @@ export default class ExpensePage extends Component {
         date={item.date}
       />
     ))
-    const total = amounts.reduce((acc, currentValue) =>
-      ((acc += parseFloat(currentValue.amount)), 0).toFixed(2)
-    )
     return (
       <div>
+        <div>Total Expense:</div>
         <button onclick={this.showModal}>+</button>
         <Modal.Dialog show={this.state.show} onHide={this.hideModal}>
           <Modal.Header closeButton>
@@ -93,15 +96,11 @@ export default class ExpensePage extends Component {
             <Button variant="primary">Save changes</Button> */}
           </Modal.Footer>
         </Modal.Dialog>
-        {/* <div>
-          {this.state.expenses.reduce((accumulator, currentValue) => {
-            return (accumulator += parseInt(currentValue.amount))
-          }, 0)}
-        </div> */}
         <div>
-          {amounts}
-          {total}
+          <h1>Total:</h1>
+          <p>{this.state.totalAmount}</p>
         </div>
+        <div>{amounts}</div>
       </div>
     )
   }
