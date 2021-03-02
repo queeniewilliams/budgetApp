@@ -7,9 +7,9 @@ export default class ListSpending extends Component {
       <div>
         <div className="listSpending">
           <p>{this.props.totalAmount}</p>
-          <h1>{this.props.amount}</h1>
-          <h1>{this.props.description}</h1>
-          <h1>{this.props.date}</h1>
+          <h3>{this.props.description}</h3>
+          <h2>$ {this.props.amount}</h2>
+          <h4>{this.props.startDate}</h4>
         </div>
       </div>
     )

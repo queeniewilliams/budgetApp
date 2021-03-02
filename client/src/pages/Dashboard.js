@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
             <Investment />
           </NavLink>
           <div className="balance">
-            <h1 style={{ color: 'white' }}></h1>
+            {/* <h1 style={{ color: 'white' }}></h1> */}
             <PieChart
               data={[
                 { key: 'A', value: 100 },

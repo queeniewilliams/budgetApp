@@ -4,22 +4,25 @@ import ListSpending from '../components/ListSpending'
 import './ExpensePage.css'
 import Switch from 'react-switch'
 import ListBill from '../components/ListBill'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default class ExpensePage extends Component {
   constructor() {
     super()
     this.state = {
-      amount: null,
+      amount: '',
       description: '',
-      date: '',
       totalSpend: [],
       totalBill: [],
       totalAmount: 0,
       show: false,
-      checked: false
+      checked: false,
+      startDate: new Date()
     }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
+  setStartDate = (date) => this.setState({ startDate: date })
   handleSwitch = (checked) => this.setState({ checked })
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
@@ -29,46 +32,56 @@ export default class ExpensePage extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  handleDateChange = (e) => {
-    this.setState({ date: e.target.value })
-  }
+  // handleDateChange = (e) => {
+  //   this.setState({ date: e.target.value })
+  // }
   handleSubmit = (e) => {
     e.preventDefault()
     const newSpend = this.state.totalSpend
+    const newBill = this.state.totalBill
     let newAmount = (
       parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
     ).toFixed(2)
-    newSpend.push({
-      amount: this.state.amount,
-      description: this.state.description,
-      date: this.state.date
-    })
+    if (this.state.checked) {
+      newBill.push({
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate
+      })
+    } else {
+      newSpend.push({
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate
+      })
+    }
     this.setState({
       amount: '',
       description: '',
-      date: '',
+      startDate: new Date(),
       totalSpend: newSpend,
+      totalBill: newBill,
       totalAmount: newAmount
     })
   }
   render() {
-    const amounts = this.state.totalSpend.map((item, index) => {
-      this.state.checked ? (
-        <ListSpending
-          key={'spend' + index}
-          amount={item.amount}
-          description={item.description}
-          date={item.date}
-        />
-      ) : (
-        <ListBill
-          key={'bill' + index}
-          amount={item.amount}
-          description={item.description}
-          date={item.date}
-        />
-      )
-    })
+    console.log(this.state.startDate.toLocaleDateString())
+    const amounts = this.state.totalSpend.map((item, index) => (
+      <ListSpending
+        key={'spend' + index}
+        amount={item.amount}
+        description={item.description}
+        startDate={item.startDate.toLocaleDateString()}
+      />
+    ))
+    const bills = this.state.totalBill.map((item, index) => (
+      <ListBill
+        key={'bill' + index}
+        amount={item.amount}
+        description={item.description}
+        startDate={item.startDate.toLocaleDateString()}
+      />
+    ))
     return (
       <div>
         <Modal
@@ -76,6 +89,7 @@ export default class ExpensePage extends Component {
           show={this.state.show}
           onHide={() => this.handleClose()}
         >
+          <Button onClick={() => this.handleClose()}>X</Button>
           <Modal.Header>
             <h2
               style={this.state.checked ? { color: 'blue' } : { color: 'red' }}
@@ -115,11 +129,11 @@ export default class ExpensePage extends Component {
                 onChange={this.handleDescriptionChange}
               ></input>
               <h3>Date:</h3>
-              <input
-                type="text"
-                value={this.state.date}
-                onChange={this.handleDateChange}
-              ></input>
+              <DatePicker
+                selected={this.state.startDate}
+                value={this.state.startDate}
+                onChange={(date) => this.setStartDate(date)}
+              />
               <br></br>
               <Button
                 type="submit"
@@ -132,11 +146,17 @@ export default class ExpensePage extends Component {
           </Modal.Body>
         </Modal>
         <div className="expensePage">
-          <h1>Spend:</h1>
-          <p>{this.state.totalAmount}</p>
+          <h1>Total Expense:</h1>
+          <p style={{ color: 'white' }}>{this.state.totalAmount}</p>
           <div className="box">
-            <div className="box1">{amounts}</div>
-            <div className="box2">{amounts}</div>
+            <div className="box1">
+              <h3>Spending</h3>
+              {amounts}
+            </div>
+            <div className="box2">
+              <h3>Bill</h3>
+              {bills}
+            </div>
           </div>
           <Button
             className="spendBtn"
