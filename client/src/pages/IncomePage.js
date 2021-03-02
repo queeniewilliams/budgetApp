@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ListIncome from '../components/ListIncome'
 
-export default class ExpensePage extends Component {
+export default class IncomePage extends Component {
   constructor() {
     super()
     this.state = {
       amount: null,
       description: '',
       date: '',
-      totalSpend: [],
-      totalBill: [],
+      incomeList: [],
       show: false,
       totalAmount: 0
     }
@@ -33,21 +32,20 @@ export default class ExpensePage extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    const newSpend = this.state.totalSpend
+    const newIncomeList = this.state.incomeList
     let newAmount = (
       parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
     ).toFixed(2)
-    newSpend.push({
+    newIncomeList.push({
       amount: this.state.amount,
       description: this.state.description,
       date: this.state.date
     })
-    // this.setState({ totalAmount: newAmount })
     this.setState({
       amount: '',
       description: '',
       date: '',
-      totalSpend: newSpend,
+      incomeList: newIncomeList,
       totalAmount: newAmount
     })
   }

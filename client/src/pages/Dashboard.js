@@ -4,6 +4,7 @@ import Expense from '../components/Expense'
 import Income from '../components/Income'
 import Investment from '../components/Investment'
 import { NavLink } from 'react-router-dom'
+import { PieChart } from 'react-easy-chart'
 
 export default class Dashboard extends Component {
   constructor() {
@@ -42,7 +43,14 @@ export default class Dashboard extends Component {
             <Investment />
           </NavLink>
           <div className="balance">
-            <h1 style={{ color: 'white' }}>Hi</h1>
+            <h1 style={{ color: 'white' }}></h1>
+            <PieChart
+              data={[
+                { key: 'A', value: 100 },
+                { key: 'B', value: 200 },
+                { key: 'C', value: 50 }
+              ]}
+            />
           </div>
           <div className="history">
             <h1 style={{ color: 'white' }}>History</h1>

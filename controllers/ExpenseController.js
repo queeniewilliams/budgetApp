@@ -30,4 +30,22 @@ const getExpenseById = async (req, res) => {
   }
 }
 
-module.exports = { createExpense, getAllExpenses, getExpenseById }
+const deleteExpense = async (req, res) => {
+  try {
+    await Expense.deleteOne({ _id: req.params.expenses_id })
+    res.send({
+      msg: 'Expense Deleted',
+      payload: req.params.expenses_id,
+      status: 'Ok'
+    })
+  } catch (error) {
+    res.status(500).json({ msg: error.message })
+  }
+}
+
+module.exports = {
+  createExpense,
+  getAllExpenses,
+  getExpenseById,
+  deleteExpense
+}
