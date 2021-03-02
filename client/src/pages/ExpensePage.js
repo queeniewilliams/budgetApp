@@ -11,12 +11,16 @@ export default class ExpensePage extends Component {
       date: '',
       totalSpend: [],
       totalBill: [],
-      show: false
+      show: false,
+      expenses: ''
     }
   }
 
   showModal = () => {
     this.setState({ show: true })
+  }
+  hideModal = () => {
+    this.setState({ show: false })
   }
   handleAmountChange = (e) => {
     this.setState({ amount: e.target.value })
@@ -27,7 +31,8 @@ export default class ExpensePage extends Component {
   handleDateChange = (e) => {
     this.setState({ date: e.target.value })
   }
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
     const newSpend = this.state.totalSpend
     newSpend.push({
       amount: this.state.amount,
@@ -42,10 +47,21 @@ export default class ExpensePage extends Component {
     })
   }
   render() {
+    const amounts = this.state.totalSpend.map((item, index) => (
+      <ListSpending
+        key={'spend' + index}
+        amount={item.amount}
+        description={item.description}
+        date={item.date}
+      />
+    ))
+    const total = amounts.reduce((acc, currentValue) =>
+      ((acc += parseFloat(currentValue.amount)), 0).toFixed(2)
+    )
     return (
       <div>
         <button onclick={this.showModal}>+</button>
-        <Modal.Dialog show={this.state.show}>
+        <Modal.Dialog show={this.state.show} onHide={this.hideModal}>
           <Modal.Header closeButton>
             <Modal.Title>NEW EXPENSE</Modal.Title>
           </Modal.Header>
@@ -61,7 +77,7 @@ export default class ExpensePage extends Component {
               <input
                 type="text"
                 value={this.state.description}
-                onchange={this.handleDescriptionChange}
+                onChange={this.handleDescriptionChange}
               ></input>
               <h3>Date:</h3>
               <input
@@ -77,15 +93,14 @@ export default class ExpensePage extends Component {
             <Button variant="primary">Save changes</Button> */}
           </Modal.Footer>
         </Modal.Dialog>
+        {/* <div>
+          {this.state.expenses.reduce((accumulator, currentValue) => {
+            return (accumulator += parseInt(currentValue.amount))
+          }, 0)}
+        </div> */}
         <div>
-          {this.state.totalSpend.map((item, index) => (
-            <ListSpending
-              key={'spend' + index}
-              amount={item.amount}
-              description={item.description}
-              date={item.date}
-            />
-          ))}
+          {amounts}
+          {total}
         </div>
       </div>
     )
