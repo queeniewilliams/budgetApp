@@ -22,7 +22,7 @@ class BarChart extends React.Component {
       .data(dataset)
       .enter()
       .append('rect')
-      .attr('fill', 'navy')
+      .attr('fill', 'grey')
       .attr('class', 'sBar')
       .attr('x', (d, i) => i * 60)
       .attr('y', (d, i) => {
