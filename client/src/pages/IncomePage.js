@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap/Modal'
+import { Modal, Button } from 'react-bootstrap'
 import ListIncome from '../components/ListIncome'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default class IncomePage extends Component {
   constructor() {
@@ -8,27 +10,20 @@ export default class IncomePage extends Component {
     this.state = {
       amount: null,
       description: '',
-      date: '',
       incomeList: [],
       show: false,
-      totalAmount: 0
+      totalAmount: 0,
+      startDate: new Date()
     }
   }
-
-  showModal = () => {
-    this.setState({ show: true })
-  }
-  hideModal = () => {
-    this.setState({ show: false })
-  }
+  setStartDate = (date) => this.setState({ startDate: date })
+  handleClose = () => this.setState({ show: false })
+  handleShow = () => this.setState({ show: true })
   handleAmountChange = (e) => {
     this.setState({ amount: e.target.value })
   }
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
-  }
-  handleDateChange = (e) => {
-    this.setState({ date: e.target.value })
   }
   handleSubmit = (e) => {
     e.preventDefault()
@@ -39,32 +34,39 @@ export default class IncomePage extends Component {
     newIncomeList.push({
       amount: this.state.amount,
       description: this.state.description,
-      date: this.state.date
+      startDate: this.state.startDate
     })
     this.setState({
       amount: '',
       description: '',
-      date: '',
+      startDate: new Date(),
       incomeList: newIncomeList,
       totalAmount: newAmount
     })
   }
   render() {
-    const amounts = this.state.totalSpend.map((item, index) => (
+    const amounts = this.state.incomeList.map((item, index) => (
       <ListIncome
-        key={'spend' + index}
+        key={'income' + index}
         amount={item.amount}
         description={item.description}
-        date={item.date}
+        startDate={item.startDate.toLocaleDateString()}
       />
     ))
     return (
       <div>
         <div>Total Income:</div>
-        <button onclick={this.showModal}>+</button>
-        <Modal.Dialog show={this.state.show} onHide={this.hideModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>NEW INCOME</Modal.Title>
+        <p>{this.state.totalAmount}</p>
+        <Modal
+          dialogClassName="modal"
+          show={this.state.show}
+          onHide={() => this.handleClose()}
+        >
+          <Button className="closeBtn" onClick={() => this.handleClose()}>
+            X
+          </Button>
+          <Modal.Header>
+            <h5>NEW INCOME</h5>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
@@ -81,24 +83,32 @@ export default class IncomePage extends Component {
                 onChange={this.handleDescriptionChange}
               ></input>
               <h3>Date:</h3>
-              <input
-                type="text"
-                value={this.state.date}
-                onChange={this.handleDateChange}
-              ></input>
-              <input type="submit" value="submit"></input>
+              <DatePicker
+                selected={this.state.startDate}
+                value={this.state.startDate}
+                onChange={(date) => this.setStartDate(date)}
+              />
+              <br></br>
+              <Button
+                type="submit"
+                value="submit"
+                onClick={() => this.handleClose()}
+              >
+                Save
+              </Button>
             </form>
           </Modal.Body>
-          <Modal.Footer>
-            {/* <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save changes</Button> */}
-          </Modal.Footer>
-        </Modal.Dialog>
-        <div>
-          <h1>Total:</h1>
-          <p>{this.state.totalAmount}</p>
+        </Modal>
+        <div className="incomePage">
+          <div>{amounts}</div>
         </div>
-        <div>{amounts}</div>
+        <Button
+          className="spendBtn"
+          variant="primary"
+          onClick={() => this.handleShow()}
+        >
+          +
+        </Button>
       </div>
     )
   }

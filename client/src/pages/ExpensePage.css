@@ -61,6 +61,10 @@
   color: rgba(224, 15, 214, 0.822);
   cursor: pointer;
 }
+.closeBtn {
+  float: right;
+  margin-right: 0;
+}
 h1 {
   color: aliceblue;
   margin: auto;

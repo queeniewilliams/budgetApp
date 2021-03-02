@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ListIncome extends Component {
+export default class ListInvestment extends Component {
   render() {
     return (
       <div>

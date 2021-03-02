@@ -32,9 +32,6 @@ export default class ExpensePage extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  // handleDateChange = (e) => {
-  //   this.setState({ date: e.target.value })
-  // }
   handleSubmit = (e) => {
     e.preventDefault()
     const newSpend = this.state.totalSpend
@@ -89,13 +86,15 @@ export default class ExpensePage extends Component {
           show={this.state.show}
           onHide={() => this.handleClose()}
         >
-          <Button onClick={() => this.handleClose()}>X</Button>
+          <Button className="closeBtn" onClick={() => this.handleClose()}>
+            X
+          </Button>
           <Modal.Header>
-            <h2
+            <h5
               style={this.state.checked ? { color: 'blue' } : { color: 'red' }}
             >
               {this.state.checked ? 'NEW BILL' : ' NEW EXPENSE'}
-            </h2>
+            </h5>
             <label>
               <Switch
                 onChange={this.handleSwitch}
