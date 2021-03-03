@@ -4,11 +4,14 @@ import * as d3 from 'd3'
 class BarChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      data: this.props.data
+    }
+    console.log(this.props.data)
   }
 
   componentDidMount() {
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9]
+    const dataset = this.state.data
     const w = 500
     const h = 300
     const svg = d3

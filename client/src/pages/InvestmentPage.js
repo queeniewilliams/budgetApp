@@ -3,12 +3,14 @@ import { Modal, Button } from 'react-bootstrap'
 import ListInvestment from '../components/ListInvestment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
+import { BASE_URL } from '../globals'
 
 export default class InvestmentPage extends Component {
   constructor() {
     super()
     this.state = {
-      amount: null,
+      amount: '',
       description: '',
       investmentList: [],
       show: false,
@@ -25,24 +27,35 @@ export default class InvestmentPage extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
-    const newInvestmentList = this.state.investmentList
-    let newAmount = (
-      parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
-    ).toFixed(2)
-    newInvestmentList.push({
-      amount: this.state.amount,
-      description: this.state.description,
-      startDate: this.state.startDate
-    })
-    this.setState({
-      amount: '',
-      description: '',
-      startDate: new Date(),
-      investmentList: newInvestmentList,
-      totalAmount: newAmount
-    })
+    try {
+      let response = await axios.post(`${BASE_URL}/investments/add`, {
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate.toLocaleDateString()
+      })
+      console.log(response.data)
+      const newInvestmentList = this.state.investmentList
+      let newAmount = (
+        parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
+      ).toFixed(2)
+      newInvestmentList.push({
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate
+      })
+      this.setState({
+        amount: '',
+        description: '',
+        startDate: new Date(),
+        investmentList: newInvestmentList,
+        totalAmount: newAmount
+      })
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     const amounts = this.state.investmentList.map((item, index) => (

@@ -1,8 +1,9 @@
 const express = require('express')
 const db = require('./db/connection')
 
-const route = require('./routes/Route')
+const ExpenseRoute = require('./routes/ExpenseRoute')
 const IncomeRoute = require('./routes/IncomeRoute')
+const InvestmentRoute = require('./routes/InvestmentRoute')
 
 const bodyParser = require('body-parser')
 const logger = require('morgan')
@@ -16,8 +17,9 @@ app.use(bodyParser.json())
 app.use(logger('dev'))
 app.use(cors())
 
-app.use('/expenses', route)
+app.use('/expenses', ExpenseRoute)
 app.use('/income', IncomeRoute)
+app.use('/investments', InvestmentRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error: '))
 

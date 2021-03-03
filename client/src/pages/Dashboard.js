@@ -15,33 +15,84 @@ export default class Dashboard extends Component {
       balance: 0,
       totalIncome: 0,
       totalExpense: 0,
-      totalInvestment: 0
+      totalInvestment: 0,
+      expensesArr: []
     }
   }
   componentDidMount() {
     this.getAllExpenses()
+    this.getAllIncome()
+    this.getAllInvestment()
+    this.setBalance()
   }
   getAllExpenses = async () => {
-    // e.preventDefault()
     try {
       const response = await axios.get(`${BASE_URL}/expenses`)
       let expenses = response.data.expenses
-      this.calcTotal(expenses)
+      this.calcExpenses(expenses)
     } catch (error) {
       console.log(error)
     }
   }
 
-  calcTotal = (expenses) => {
-    const expensesArr = []
+  calcExpenses = (expenses) => {
     expenses.map((expense) => {
-      expensesArr.push(expense.amount)
+      this.state.expensesArr.push(parseFloat(expense.amount))
     })
-    console.log(expensesArr)
+    console.log(this.state.expensesArr)
+    const reducer = (accumulator, currentValue) => accumulator + currentValue
+    this.setState({ totalExpense: this.state.expensesArr.reduce(reducer) })
+    console.log(this.state.totalExpense)
+  }
+  getAllIncome = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/income`)
+      console.log(response.data)
+      let incomes = response.data.incomes
+      this.calcIncome(incomes)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  calcIncome = (incomes) => {
+    const incomeArr = []
+    incomes.map((income) => {
+      incomeArr.push(income.amount)
+    })
+    console.log(incomeArr)
     const reducer = (accumulator, currentValue) =>
       parseFloat(accumulator) + parseFloat(currentValue)
-    this.setState({ totalExpense: expensesArr.reduce(reducer) })
-    console.log(this.state.totalExpense)
+    this.setState({ totalIncome: incomeArr.reduce(reducer) })
+    console.log(this.state.totalIncome)
+  }
+
+  getAllInvestment = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/investments`)
+      console.log(response.data)
+      let investments = response.data.investments
+      this.calcInvestment(investments)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  calcInvestment = (investments) => {
+    const investmentArr = []
+    investments.map((investment) => {
+      investmentArr.push(investment.amount)
+    })
+    console.log(investmentArr)
+    const reducer = (accumulator, currentValue) =>
+      parseFloat(accumulator) + parseFloat(currentValue)
+    this.setState({ totalInvestment: investmentArr.reduce(reducer) })
+    console.log(this.state.totalInvestment)
+  }
+  setBalance = () => {
+    console.log(this.state.totalIncome)
+    this.setState({ balance: this.state.totalIncome - this.state.totalExpense })
+    console.log(this.state.balance)
   }
 
   render() {
@@ -60,7 +111,7 @@ export default class Dashboard extends Component {
             className="expense"
             style={{ textDecoration: 'none' }}
           >
-            <Expense />
+            <Expense data={this.state.expensesArr} />
           </NavLink>
           <NavLink
             to="/dashboard/investment"
@@ -72,10 +123,21 @@ export default class Dashboard extends Component {
           <div className="balance">
             {/* <h1 style={{ color: 'white' }}></h1> */}
             <PieChart
+              labels
+              size={350}
+              innerHoleSize={300}
               data={[
-                { key: 'A', value: this.state.totalExpense },
-                { key: 'B', value: 200 },
-                { key: 'C', value: 50 }
+                {
+                  key: 'Expense',
+                  value: this.state.totalExpense,
+                  color: 'rgb(174, 32, 179)'
+                },
+                {
+                  key: 'Income',
+                  value: this.state.totalIncome,
+                  color: 'rgba(0, 255, 255, 0.678)'
+                },
+                { key: 'Investment', value: this.state.totalInvestment }
               ]}
             />
           </div>

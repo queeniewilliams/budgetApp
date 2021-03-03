@@ -4,13 +4,13 @@ import ListIncome from '../components/ListIncome'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
-import {BASE_URL}from'../globals'
+import { BASE_URL } from '../globals'
 
 export default class IncomePage extends Component {
   constructor() {
     super()
     this.state = {
-      amount: null,
+      amount: '',
       description: '',
       incomeList: [],
       show: false,
@@ -27,7 +27,7 @@ export default class IncomePage extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     try {
       let response = await axios.post(`${BASE_URL}/income/add`, {
@@ -36,26 +36,26 @@ export default class IncomePage extends Component {
         startDate: this.state.startDate.toLocaleDateString()
       })
       console.log(response)
-    const newIncomeList = this.state.incomeList
-    let newAmount = (
-      parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
-    ).toFixed(2)
-    newIncomeList.push({
-      amount: this.state.amount,
-      description: this.state.description,
-      startDate: this.state.startDate
-    })
-    this.setState({
-      amount: '',
-      description: '',
-      startDate: new Date(),
-      incomeList: newIncomeList,
-      totalAmount: newAmount
-    })
-    return response.data
-  }catch(error){
-    console.log(error)
-  }
+      const newIncomeList = this.state.incomeList
+      let newAmount = (
+        parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
+      ).toFixed(2)
+      newIncomeList.push({
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate
+      })
+      this.setState({
+        amount: '',
+        description: '',
+        startDate: new Date(),
+        incomeList: newIncomeList,
+        totalAmount: newAmount
+      })
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     const amounts = this.state.incomeList.map((item, index) => (
