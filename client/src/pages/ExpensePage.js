@@ -161,8 +161,10 @@ export default class ExpensePage extends Component {
           </Modal.Body>
         </Modal>
         <div className="expensePage">
-          <h1>Total Expense:</h1>
-          <h7 style={{ color: 'white' }}>{this.state.totalAmount}</h7>
+          <h1>
+            Total Expense:<br></br>
+            {this.state.totalAmount}
+          </h1>
           <div className="box">
             <div className="box1">
               <h3>Spending</h3>
