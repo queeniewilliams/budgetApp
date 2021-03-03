@@ -46,7 +46,8 @@
   grid-template-rows: 1fr 1fr; */
   display: flex;
   justify-content: space-around;
-  width: 300px;
+  width: 700px;
+  align-items: center;
 }
 .listbill {
   display: flex;
@@ -82,4 +83,15 @@ h3 {
 }
 h4 {
   font-size: 15px;
+}
+.icons {
+  z-index: 2;
+}
+.editBtn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+.deleteBtn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }

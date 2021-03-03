@@ -30,4 +30,44 @@ const getInvestmentById = async (req, res) => {
   }
 }
 
-module.exports = { createInvestment, getAllInvestment, getInvestmentById }
+const deleteInvestment = async (req, res) => {
+  try {
+    const { id } = req.params
+    const deleted = await Investment.findByIdAndDelete(id)
+    if (deleted) {
+      return res.status(200).send('Investment deleted')
+    }
+    throw new Error('Investment not found')
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+const updateInvestment = async (req, res) => {
+  try {
+    const { id } = req.params
+    await Investment.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true },
+      (err, investment) => {
+        if (err) {
+          res.status(500).send(err)
+        }
+        if (!investment) {
+          res.status(500).send('Investment not found!')
+        }
+        return res.status(200).json(investment)
+      }
+    )
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+module.exports = {
+  createInvestment,
+  getAllInvestment,
+  getInvestmentById,
+  deleteInvestment,
+  updateInvestment
+}

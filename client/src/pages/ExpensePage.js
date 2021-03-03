@@ -85,6 +85,7 @@ export default class ExpensePage extends Component {
         amount={item.amount}
         description={item.description}
         startDate={item.startDate.toLocaleDateString()}
+        handleShow={this.handleShow}
       />
     ))
     const bills = this.state.totalBill.map((item, index) => (
