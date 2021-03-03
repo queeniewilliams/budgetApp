@@ -2,6 +2,7 @@ const express = require('express')
 const db = require('./db/connection')
 
 const route = require('./routes/Route')
+const IncomeRoute = require('./routes/IncomeRoute')
 
 const bodyParser = require('body-parser')
 const logger = require('morgan')
@@ -15,7 +16,8 @@ app.use(bodyParser.json())
 app.use(logger('dev'))
 app.use(cors())
 
-app.use('/api', route)
+app.use('/expenses', route)
+app.use('/income', IncomeRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error: '))
 

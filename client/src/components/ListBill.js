@@ -6,7 +6,6 @@ export default class ListBill extends Component {
     return (
       <div>
         <div className="listbill">
-          <p>{this.props.totalAmount}</p>
           <h1>$ {this.props.amount}</h1>
           <h1>{this.props.description}</h1>
           <h1>{this.props.startDate}</h1>

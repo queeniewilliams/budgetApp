@@ -3,6 +3,8 @@ import { Modal, Button } from 'react-bootstrap'
 import ListIncome from '../components/ListIncome'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
+import {BASE_URL}from'../globals'
 
 export default class IncomePage extends Component {
   constructor() {
@@ -27,6 +29,13 @@ export default class IncomePage extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
+    try {
+      let response = await axios.post(`${BASE_URL}/income/add`, {
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate.toLocaleDateString()
+      })
+      console.log(response)
     const newIncomeList = this.state.incomeList
     let newAmount = (
       parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
@@ -43,6 +52,10 @@ export default class IncomePage extends Component {
       incomeList: newIncomeList,
       totalAmount: newAmount
     })
+    return response.data
+  }catch(error){
+    console.log(error)
+  }
   }
   render() {
     const amounts = this.state.incomeList.map((item, index) => (

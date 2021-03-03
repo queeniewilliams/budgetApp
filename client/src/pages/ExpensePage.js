@@ -6,16 +6,19 @@ import Switch from 'react-switch'
 import ListBill from '../components/ListBill'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { BASE_URL } from '../globals'
+import axios from 'axios'
 
 export default class ExpensePage extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    console.log(this.props.totalAmount)
     this.state = {
       amount: '',
       description: '',
       totalSpend: [],
       totalBill: [],
-      totalAmount: 0,
+      totalAmount: this.props.totalAmount,
       show: false,
       checked: false,
       startDate: new Date()
@@ -32,34 +35,47 @@ export default class ExpensePage extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  handleSubmit = (e) => {
+
+  handleSubmit = async (e) => {
     e.preventDefault()
-    const newSpend = this.state.totalSpend
-    const newBill = this.state.totalBill
-    let newAmount = (
-      parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
-    ).toFixed(2)
-    if (this.state.checked) {
-      newBill.push({
+    try {
+      let response = await axios.post(`${BASE_URL}/expenses/add`, {
         amount: this.state.amount,
         description: this.state.description,
-        startDate: this.state.startDate
+        startDate: this.state.startDate.toLocaleDateString()
       })
-    } else {
-      newSpend.push({
-        amount: this.state.amount,
-        description: this.state.description,
-        startDate: this.state.startDate
+      console.log(response)
+      const newSpend = this.state.totalSpend
+      const newBill = this.state.totalBill
+      let newAmount = (
+        parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
+      ).toFixed(2)
+      if (this.state.checked) {
+        newBill.push({
+          amount: this.state.amount,
+          description: this.state.description,
+          startDate: this.state.startDate
+        })
+      } else {
+        newSpend.push({
+          amount: this.state.amount,
+          description: this.state.description,
+          startDate: this.state.startDate
+        })
+      }
+      this.setState({
+        amount: '',
+        description: '',
+        startDate: new Date(),
+        totalSpend: newSpend,
+        totalBill: newBill,
+        totalAmount: newAmount
       })
+      console.log(this.state)
+      return response.data
+    } catch (error) {
+      console.log('error')
     }
-    this.setState({
-      amount: '',
-      description: '',
-      startDate: new Date(),
-      totalSpend: newSpend,
-      totalBill: newBill,
-      totalAmount: newAmount
-    })
   }
   render() {
     console.log(this.state.startDate.toLocaleDateString())
@@ -146,7 +162,7 @@ export default class ExpensePage extends Component {
         </Modal>
         <div className="expensePage">
           <h1>Total Expense:</h1>
-          <p style={{ color: 'white' }}>{this.state.totalAmount}</p>
+          <h7 style={{ color: 'white' }}>{this.state.totalAmount}</h7>
           <div className="box">
             <div className="box1">
               <h3>Spending</h3>
