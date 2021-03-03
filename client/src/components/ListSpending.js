@@ -3,6 +3,8 @@ import '../pages/ExpensePage.css'
 import { Modal, Button } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
+import { BASE_URL } from '../globals'
 
 export default class ListSpending extends Component {
   constructor(props) {
@@ -14,18 +16,52 @@ export default class ListSpending extends Component {
       totalBill: [],
       totalAmount: this.props.totalAmount,
       show: false,
-      startDate: this.props.startDate
+      startDate: this.props.startDate,
+      id: ''
     }
   }
   setStartDate = (date) => this.setState({ startDate: date })
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
-  handleDelete = () =>
+  handleAmountChange = (e) => {
+    this.setState({ amount: e.target.value })
+  }
+  handleDescriptionChange = (e) => {
+    this.setState({ description: e.target.value })
+  }
+  componentDidMount = () => {
+    this.handleDelete()
+  }
+  handleDelete = (id) => {
+    axios.delete(`${BASE_URL}/expenses/remove/${id}`)
     this.setState({
       amount: '',
       description: '',
-      startDate: ''
+      startDate: '',
+      id: ''
     })
+    console.log('i did it')
+  }
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      let response = await axios.put(`${BASE_URL}/expenses/update/:id`, {
+        amount: this.state.amount,
+        description: this.state.description,
+        startDate: this.state.startDate.toLocaleDateString()
+      })
+      this.setState({
+        amount: '',
+        description: '',
+        startDate: new Date()
+      })
+      console.log(this.state)
+      return response.data
+    } catch (error) {
+      console.log('error')
+    }
+  }
+
   render() {
     return (
       <div>
@@ -34,10 +70,13 @@ export default class ListSpending extends Component {
           <h2>$ {this.props.amount}</h2>
           <h4>{this.props.startDate}</h4>
           <div className="icons">
-            <Button className="deleteBtn" onClick={() => this.handleDelete()}>
+            <Button
+              className="deleteBtn"
+              onClick={(id) => this.handleDelete(id)}
+            >
               <img
                 src="https://i.ibb.co/BjQrJmR/Seek-Png-com-edit-icon-png-2022743.png"
-                alt="image"
+                alt="deleteIcon"
                 width="30px"
                 height="30px"
               />
@@ -45,7 +84,7 @@ export default class ListSpending extends Component {
             <Button className="editBtn" onClick={() => this.handleShow()}>
               <img
                 src="https://i.ibb.co/st2BVhL/pngfind-com-edit-icon-png-704605.png"
-                alt="image"
+                alt="editIcon"
                 width="30px"
                 height="30px"
               />

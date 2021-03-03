@@ -2,18 +2,11 @@ import React from 'react'
 import * as d3 from 'd3'
 
 class BarChart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: this.props.data
-    }
-    console.log(this.props.data)
-  }
-
   componentDidMount() {
-    const dataset = this.state.data
-    const w = 500
-    const h = 300
+    console.log(this.props)
+    const dataset = this.props.data
+    const w = 700
+    const h = 500
     const svg = d3
       .select(this.refs.chart)
       .append('svg')
@@ -27,11 +20,11 @@ class BarChart extends React.Component {
       .append('rect')
       .attr('fill', 'grey')
       .attr('class', 'sBar')
-      .attr('x', (d, i) => i * 50)
+      .attr('x', (d, i) => i * 25)
       .attr('y', (d, i) => {
         return h - 7 * d
       })
-      .attr('width', 40)
+      .attr('width', 20)
       .attr('height', (d, i) => 7 * d)
       .append('title')
       .text((d) => d)
@@ -42,7 +35,7 @@ class BarChart extends React.Component {
       .append('text')
       .style('font-size', 18)
       .attr('fill', 'grey')
-      .attr('x', (d, i) => i * 50)
+      .attr('x', (d, i) => i * 25)
       .attr('y', (d, i) => h - 7 * d - 3)
       .text((d) => d)
   }
@@ -53,7 +46,7 @@ class BarChart extends React.Component {
         justifyItems: 'center'
       }
     }
-    return <div ref="chart" style={styles.container}></div>
+    return this.props.data && <div ref="chart" style={styles.container}></div>
   }
 }
 export default BarChart

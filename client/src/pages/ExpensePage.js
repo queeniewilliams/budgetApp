@@ -81,19 +81,19 @@ export default class ExpensePage extends Component {
     console.log(this.state.startDate.toLocaleDateString())
     const amounts = this.state.totalSpend.map((item, index) => (
       <ListSpending
-        key={'spend' + index}
+        key={item._id}
         amount={item.amount}
         description={item.description}
         startDate={item.startDate.toLocaleDateString()}
         handleShow={this.handleShow}
       />
     ))
-    const bills = this.state.totalBill.map((item, index) => (
+    const bills = this.state.totalBill.map((bill, index) => (
       <ListBill
-        key={'bill' + index}
-        amount={item.amount}
-        description={item.description}
-        startDate={item.startDate.toLocaleDateString()}
+        key={bill}
+        amount={bill.amount}
+        description={bill.description}
+        startDate={bill.startDate.toLocaleDateString()}
       />
     ))
     return (

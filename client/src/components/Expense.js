@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ExpensePage from '../pages/ExpensePage'
+// import ExpensePage from '../pages/ExpensePage'
 import BarChart from './BarChart'
 
 export default class Expense extends Component {
@@ -7,7 +7,7 @@ export default class Expense extends Component {
     return (
       <div>
         <h1>Expense</h1>
-        <BarChart data={this.props.data} />
+        {this.props.data && <BarChart data={this.props.data} />}
       </div>
     )
   }

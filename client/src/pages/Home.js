@@ -35,6 +35,7 @@ export default class Home extends Component {
         </div>
         <img
           src="https://worldclassmanager.com/wp-content/uploads/2018/01/earth-gif.gif"
+          alt="background"
           width="100%"
           height="825vh"
         />

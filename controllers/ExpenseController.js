@@ -32,13 +32,15 @@ const getExpenseById = async (req, res) => {
 const deleteExpense = async (req, res) => {
   try {
     const { id } = req.params
+
+    console.log(req)
     const deleted = await Expense.findByIdAndDelete(id)
     if (deleted) {
       return res.status(200).send('Expense deleted')
     }
-    throw new Error('Expense not found')
+    // throw new Error('Expense not found')
   } catch (error) {
-    return res.status(500).send(error.message)
+    console.log(error)
   }
 }
 const updateExpense = async (req, res) => {
