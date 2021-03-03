@@ -31,13 +31,6 @@ export default class Home extends Component {
             The expense tracker aims to assist a user in managing personal
             finances by offering not only a basic expense check but also a brief
             analysis of incomes and expenses.
-            {/* <br></br>
-            <br></br>
-            The project is a MERN stack application, deployed on Heroku. The
-            front-end is developed in CSS and React.js while the back-end is
-            created in Express and Node.js. The data is stored in MongoDB Atlas.
-            Then, a user can perform CRUD operations through this API such as
-            create, read, update, and delete data. */}
           </p>
         </div>
         <img
