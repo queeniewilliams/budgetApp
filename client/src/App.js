@@ -27,8 +27,6 @@ class App extends Component {
               render={(props) => (
                 <ExpensePage {...props} totalAmount={this.state.totalAmount} />
               )}
-              // component={ExpensePage}
-              // totalAmount={totalAmount}
             />
             <Route path="/dashboard/income" component={IncomePage} />
             <Route path="/dashboard/investment" component={InvestmentPage} />

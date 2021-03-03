@@ -15,6 +15,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "pie-chart-d3": "^1.0.2",
+    "react-animation": "^1.2.2",
     "react-d3-pie": "^1.1.1",
     "react-datepicker": "^3.6.0",
     "react-easy-chart": "^1.0.0",
