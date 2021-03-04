@@ -18,7 +18,7 @@ class IncomeBar extends React.Component {
       .data(dataset)
       .enter()
       .append('rect')
-      .attr('fill', '#c71e9d')
+      .attr('fill', 'rgba(0, 255, 255, 0.678)')
       .attr('class', 'sBar')
       .attr('x', (d, i) => i * 25)
       .attr('y', (d, i) => {

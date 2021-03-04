@@ -18,8 +18,7 @@ export default class ListSpending extends Component {
       show: false,
       startDate: new Date(),
       id: '',
-      trackDeleted: false,
-      trackEdited: false
+      trackDeleted: false
     }
   }
   componentDidMount = () => {}
@@ -58,8 +57,7 @@ export default class ListSpending extends Component {
       this.setState({
         amount: response.data.amount,
         description: response.data.description,
-        startDate: response.data.startDate,
-        trackEdited: true
+        startDate: response.data.startDate
       })
       return response.data
     } catch (error) {
@@ -102,7 +100,7 @@ export default class ListSpending extends Component {
                   X
                 </Button>
                 <Modal.Header>
-                  <h5>EDIT</h5>
+                  <h5 style={{ color: 'rgb(34, 218, 193)' }}>EDIT</h5>
                 </Modal.Header>
                 <Modal.Body>
                   <form onSubmit={this.handleSubmit}>
@@ -125,7 +123,10 @@ export default class ListSpending extends Component {
                       onChange={(date) => this.setStartDate(date)}
                     />
                     <br></br>
+                    <br></br>
+                    <br></br>
                     <Button
+                      className="saveBtn"
                       type="submit"
                       value="submit"
                       onClick={() => this.handleClose()}

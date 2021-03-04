@@ -6,7 +6,7 @@ export default class Income extends Component {
       <div>
         <h1>Income</h1>
         <div className="barChart1">
-          {this.props.data && <IncomeBar data={this.props.data} />}
+          <IncomeBar data={this.props.data} />
         </div>
       </div>
     )

@@ -19,7 +19,9 @@ class App extends Component {
       totalInvestmentAmount: 0,
       expensesArr: [],
       recentExpense: [],
-      incomeArr: []
+      incomeArr: [],
+      recentIncome: [],
+      investmentArr: []
     }
   }
   componentDidMount(e) {
@@ -69,7 +71,8 @@ class App extends Component {
     this.setState({
       totalIncomeAmount: total.toFixed(2),
       balance: balance,
-      incomeArr: incomeArr
+      incomeArr: incomeArr,
+      recentIncome: incomes
     })
   }
   getAllInvestment = async () => {
@@ -88,7 +91,10 @@ class App extends Component {
     const reducer = (accumulator, currentValue) =>
       parseFloat(accumulator) + parseFloat(currentValue)
     const totalInvestment = investmentArr.reduce(reducer)
-    this.setState({ totalInvestmentAmount: totalInvestment })
+    this.setState({
+      totalInvestmentAmount: totalInvestment,
+      investmentArr: investmentArr
+    })
   }
   render() {
     console.log(this.state.totalInvestmentAmount)
@@ -110,6 +116,8 @@ class App extends Component {
                   expensesArr={this.state.expensesArr}
                   recentExpense={this.state.recentExpense}
                   incomeArr={this.state.incomeArr}
+                  recentIncome={this.state.recentIncome}
+                  investmentArr={this.state.investmentArr}
                 />
               )}
             />

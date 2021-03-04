@@ -10,13 +10,13 @@ export default class ListBill extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      amount: this.props.amount,
-      description: this.props.description,
+      amount: props.amount || '',
+      description: props.description || '',
       totalSpend: [],
       totalBill: [],
       totalAmount: this.props.totalAmount,
       show: false,
-      startDate: this.props.startDate,
+      startDate: new Date(),
       id: '',
       trackDeleted: false
     }
@@ -48,9 +48,9 @@ export default class ListBill extends Component {
         startDate: this.state.startDate.toLocaleDateString()
       })
       this.setState({
-        amount: '',
-        description: '',
-        startDate: new Date()
+        amount: response.data.amount,
+        description: response.data.description,
+        startDate: response.data.startDate
       })
       console.log(this.state)
       return response.data
@@ -65,8 +65,8 @@ export default class ListBill extends Component {
       <div>
         {!this.state.trackDeleted ? (
           <div className="list">
-            <h3>{this.props.description}</h3>
-            <h2>$ {this.props.amount}</h2>
+            <h2>$ {this.state.amount}</h2>
+            <h3>{this.state.description}</h3>
             <h4>{this.props.startDate}</h4>
             <div className="icons">
               <Button className="deleteBtn" onClick={() => this.handleDelete()}>
@@ -94,7 +94,7 @@ export default class ListBill extends Component {
                   X
                 </Button>
                 <Modal.Header>
-                  <h5>EDIT</h5>
+                  <h5 style={{ color: 'rgb(34, 218, 193)' }}>EDIT</h5>
                 </Modal.Header>
                 <Modal.Body>
                   <form onSubmit={this.handleSubmit}>
@@ -117,7 +117,10 @@ export default class ListBill extends Component {
                       onChange={(date) => this.setStartDate(date)}
                     />
                     <br></br>
+                    <br></br>
+                    <br></br>
                     <Button
+                      className="saveBtn"
                       type="submit"
                       value="submit"
                       onClick={() => this.handleClose()}

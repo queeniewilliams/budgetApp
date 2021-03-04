@@ -6,7 +6,6 @@ import Investment from '../components/Investment'
 import History from '../components/History'
 import { NavLink } from 'react-router-dom'
 import { PieChart } from 'react-easy-chart'
-import { propTypes } from 'react-bootstrap/esm/Image'
 // import axios from 'axios'
 // import { BASE_URL } from '../globals'
 
@@ -120,6 +119,14 @@ export default class Dashboard extends Component {
         date={item.startDate}
       />
     ))
+    const incomeList = this.props.recentIncome.map((income, index) => (
+      <History
+        key={'income' + index}
+        amount={income.amount}
+        description={income.description}
+        date={income.startDate}
+      />
+    ))
     console.log(expenseList)
     return (
       <div>
@@ -143,7 +150,7 @@ export default class Dashboard extends Component {
             className="investment"
             style={{ textDecoration: 'none' }}
           >
-            <Investment />
+            <Investment data={this.props.investmentArr} />
           </NavLink>
           <div className="balance">
             <NavLink to="/">
@@ -192,7 +199,14 @@ export default class Dashboard extends Component {
               <h6 className="investmentDot">'</h6>
             </div>
           </div>
-          <div className="history">{expenseList}</div>
+          <div className="history">
+            <div className="titleBox">
+              <div className="expenseTitle">EXPENSE</div>
+              <div className="incomeTitle">INCOME</div>
+              <div>{expenseList}</div>
+              <div>{incomeList}</div>
+            </div>
+          </div>
         </div>
       </div>
     )

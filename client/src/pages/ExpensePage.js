@@ -256,7 +256,7 @@ export default class ExpensePage extends Component {
               {
                 key: 'Income',
                 value: this.props.totalIncomeAmount,
-                color: 'rgba(0, 255, 255, 0.678)'
+                color: 'rgb(34, 218, 157)'
               }
             ]}
           />
