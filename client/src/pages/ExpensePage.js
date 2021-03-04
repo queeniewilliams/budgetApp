@@ -159,14 +159,18 @@ export default class ExpensePage extends Component {
               <br></br>
               <br></br>
               <br></br>
-              <Button
-                className="saveBtn"
-                type="submit"
-                value="submit"
-                onClick={() => this.handleClose()}
-              >
-                SAVE
-              </Button>
+              {this.state.amount &&
+                this.state.description &&
+                this.state.startDate && (
+                  <Button
+                    className="saveBtn"
+                    type="submit"
+                    value="submit"
+                    onClick={() => this.handleClose()}
+                  >
+                    SAVE
+                  </Button>
+                )}
             </form>
           </Modal.Body>
         </Modal>
