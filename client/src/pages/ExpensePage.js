@@ -55,7 +55,7 @@ export default class ExpensePage extends Component {
           amount: this.state.amount,
           description: this.state.description,
           startDate: this.state.startDate,
-          billId:response.data.expenseItem._id
+          billId: response.data.expenseItem._id
         })
       } else {
         newSpend.push({
@@ -73,12 +73,12 @@ export default class ExpensePage extends Component {
         totalBill: newBill,
         totalAmount: newAmount
       })
-      console.log(this.state)
       return response.data
     } catch (error) {
       console.log('error')
     }
   }
+
   render() {
     console.log(this.state.startDate.toLocaleDateString())
     const amounts = this.state.totalSpend.map((item, index) => (
@@ -100,6 +100,7 @@ export default class ExpensePage extends Component {
         startDate={bill.startDate.toLocaleDateString()}
       />
     ))
+    console.log(this.state.totalSpendAmount)
     return (
       <div>
         <Modal

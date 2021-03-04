@@ -43,7 +43,8 @@ export default class IncomePage extends Component {
       newIncomeList.push({
         amount: this.state.amount,
         description: this.state.description,
-        startDate: this.state.startDate
+        startDate: this.state.startDate,
+        incomeId: response.data.incomeItem._id
       })
       this.setState({
         amount: '',
@@ -64,6 +65,7 @@ export default class IncomePage extends Component {
         amount={item.amount}
         description={item.description}
         startDate={item.startDate.toLocaleDateString()}
+        incomeId={item.incomeId}
       />
     ))
     return (

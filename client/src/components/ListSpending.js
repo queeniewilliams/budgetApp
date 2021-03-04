@@ -10,15 +10,16 @@ export default class ListSpending extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      amount: this.props.amount,
-      description: this.props.description,
+      amount: '',
+      description: '',
       totalSpend: [],
       totalBill: [],
       totalAmount: this.props.totalAmount,
       show: false,
-      startDate: this.props.startDate,
+      startDate: new Date(),
       id: '',
-      trackDeleted: false
+      trackDeleted: false,
+      trackEdited: false
     }
   }
   setStartDate = (date) => this.setState({ startDate: date })
@@ -30,9 +31,7 @@ export default class ListSpending extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  // componentDidMount = () => {
-  //   // this.handleDelete()
-  // }
+
   handleDelete = () => {
     axios.delete(`${BASE_URL}/expenses/remove/${this.props.spendId}`)
     this.setState({
@@ -46,17 +45,21 @@ export default class ListSpending extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      let response = await axios.put(`${BASE_URL}/expenses/update/:id`, {
+      let response = await axios.put(
+        `${BASE_URL}/expenses/update/${this.props.spendId}`,
+        {
+          amount: this.state.amount,
+          description: this.state.description,
+          startDate: this.state.startDate.toLocaleDateString()
+        }
+      )
+      this.setState({
         amount: this.state.amount,
         description: this.state.description,
-        startDate: this.state.startDate.toLocaleDateString()
+        startDate: this.state.startDate.toLocaleDateString(),
+        trackEdited: true
       })
-      this.setState({
-        amount: '',
-        description: '',
-        startDate: new Date()
-      })
-      console.log(this.state)
+      console.log(response.data)
       return response.data
     } catch (error) {
       console.log('error')
@@ -69,8 +72,8 @@ export default class ListSpending extends Component {
       <div>
         {!this.state.trackDeleted ? (
           <div className="listSpending">
-            <h3>{this.props.description}</h3>
             <h2>$ {this.props.amount}</h2>
+            <h3>{this.props.description}</h3>
             <h4>{this.props.startDate}</h4>
             <div className="icons">
               <Button className="deleteBtn" onClick={() => this.handleDelete()}>

@@ -38,7 +38,6 @@ export default class ListBill extends Component {
       startDate: '',
       trackDeleted: true
     })
-    console.log('i did it')
   }
   handleSubmit = async (e) => {
     e.preventDefault()

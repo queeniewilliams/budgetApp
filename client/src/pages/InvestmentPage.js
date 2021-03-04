@@ -43,7 +43,8 @@ export default class InvestmentPage extends Component {
       newInvestmentList.push({
         amount: this.state.amount,
         description: this.state.description,
-        startDate: this.state.startDate
+        startDate: this.state.startDate,
+        investmentId: response.data.investmentItem._id
       })
       this.setState({
         amount: '',
@@ -64,12 +65,13 @@ export default class InvestmentPage extends Component {
         amount={item.amount}
         description={item.description}
         startDate={item.startDate.toLocaleDateString()}
+        investmentId={item.investmentId}
       />
     ))
     return (
       <div>
         <div>Total Investment:</div>
-        <p>{this.state.totalAmount}</p>
+        <p style={{ color: 'red' }}>{this.state.totalAmount}</p>
         <Modal
           dialogClassName="modal"
           show={this.state.show}

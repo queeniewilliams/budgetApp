@@ -52,8 +52,6 @@ export default class Dashboard extends Component {
       recentExpense: expenses,
       expensesArr: expenseAmounts
     })
-    // console.log(this.state)
-    // console.log(this.state.totalExpense)
   }
 
   getAllIncome = async () => {
@@ -117,8 +115,14 @@ export default class Dashboard extends Component {
 
   render() {
     const expenseList = this.state.recentExpense.map((item, index) => (
-      <History key={item._id} amount={item.amount} />
+      <History
+        // key={'item' + index}
+        amount={item.amount}
+        description={item.description}
+        date={item.date}
+      />
     ))
+    console.log(expenseList)
     console.log(this.state.recentExpense)
     return (
       <div>
@@ -148,7 +152,6 @@ export default class Dashboard extends Component {
           </NavLink>
           <div className="balance">
             <PieChart
-              labels
               size={350}
               innerHoleSize={300}
               data={[
@@ -174,7 +177,6 @@ export default class Dashboard extends Component {
                 this.state.balance > 0 ? { color: 'green' } : { color: 'red' }
               }
             >
-              {' '}
               Balance: ${this.state.balance}
             </h5>
             <div className="lists">
@@ -186,10 +188,7 @@ export default class Dashboard extends Component {
               <h9>'</h9>
             </div>
           </div>
-          <div className="history">
-            {/* <History recentExpense={this.state.recentExpense} /> */}
-            {expenseList}
-          </div>
+          <div className="history">{expenseList}</div>
         </div>
       </div>
     )
