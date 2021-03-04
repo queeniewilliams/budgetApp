@@ -27,6 +27,9 @@ export default class ExpensePage extends Component {
     }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
+  // componentDidMount(e) {
+  //   this.getAllExpenses()
+  // }
   setStartDate = (date) => this.setState({ startDate: date })
   handleSwitch = (checked) => this.setState({ checked })
   handleClose = () => this.setState({ show: false })
@@ -50,7 +53,8 @@ export default class ExpensePage extends Component {
       const newSpend = this.state.totalSpend
       const newBill = this.state.totalBill
       let newAmount = (
-        parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)
+        parseFloat(this.state.amount) +
+        parseFloat(this.props.totalExpenseAmount)
       ).toFixed(2)
       if (this.state.checked) {
         newBill.push({
@@ -80,6 +84,25 @@ export default class ExpensePage extends Component {
       console.log('error')
     }
   }
+  // getAllExpenses = async () => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/expenses`)
+  //     let expenses = response.data.expenses
+  //     console.log(expenses)
+  //     this.calcExpenses(expenses)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // calcExpenses = (expenses) => {
+  //   const expenseAmounts = expenses.map((expense) => parseFloat(expense.amount))
+  //   const reducer = (accumulator, currentValue) => accumulator + currentValue
+  //   const total = expenseAmounts.reduce(reducer)
+  //   this.setState({
+  //     totalAmount: total.toFixed(2)
+  //   })
+  // }
 
   render() {
     console.log(this.props.totalIncomeAmount, this.state.totalAmount)
@@ -238,7 +261,7 @@ export default class ExpensePage extends Component {
             ]}
           />
         </div>
-        <div className="pieChartCopy">
+        {/* <div className="pieChartCopy">
           <PieChart
             size={350}
             innerHoleSize={320}
@@ -254,8 +277,8 @@ export default class ExpensePage extends Component {
                 color: 'rgba(0, 255, 255, 0.678)'
               }
             ]}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
       </div>
     )
   }

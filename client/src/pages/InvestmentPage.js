@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
 import { NavLink } from 'react-router-dom'
+import { animations } from 'react-animation'
 
 export default class InvestmentPage extends Component {
   constructor() {
@@ -121,7 +122,12 @@ export default class InvestmentPage extends Component {
           </Modal.Body>
         </Modal>
         <div className="investmentPage">
-          <div className="navBar">
+          <div
+            className="navBar"
+            style={{
+              animation: animations.slideIn
+            }}
+          >
             <span className="navBox">
               <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
                 <h2 className="navTag">Dashboard</h2>
