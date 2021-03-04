@@ -99,10 +99,6 @@ export default class Dashboard extends Component {
     this.setState({ totalInvestment: total })
     console.log(this.state)
   }
-  // setBalance = () => {
-  //   this.setState({ balance: this.state.totalIncome - this.state.totalExpense })
-  //   // console.log(this.state.balance)
-  // }
 
   // sortDateDsc = (a, b) => {
   //   let dateA = new Date(a.date)
@@ -151,6 +147,13 @@ export default class Dashboard extends Component {
             <Investment />
           </NavLink>
           <div className="balance">
+            <NavLink to="/">
+              <img
+                className="homeIcon"
+                src="https://i.ibb.co/YDZX973/toppng-com-hombutton-white-home-button-479x388.png"
+                width="70px"
+              />
+            </NavLink>
             <PieChart
               size={350}
               innerHoleSize={300}
@@ -173,6 +176,7 @@ export default class Dashboard extends Component {
               ]}
             />
             <h5
+              className="balanceAmount"
               style={
                 this.state.balance > 0 ? { color: 'green' } : { color: 'red' }
               }

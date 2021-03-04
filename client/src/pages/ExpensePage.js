@@ -8,17 +8,18 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
+import { PieChart } from 'react-easy-chart'
+import { NavLink } from 'react-router-dom'
 
 export default class ExpensePage extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.totalAmount)
     this.state = {
       amount: '',
       description: '',
       totalSpend: [],
       totalBill: [],
-      totalAmount: this.props.totalAmount,
+      totalAmount: this.props.totalExpenseAmount,
       show: false,
       checked: false,
       startDate: new Date()
@@ -80,7 +81,7 @@ export default class ExpensePage extends Component {
   }
 
   render() {
-    console.log(this.state.startDate.toLocaleDateString())
+    console.log(this.props.totalIncomeAmount, this.state.totalAmount)
     const amounts = this.state.totalSpend.map((item, index) => (
       <ListSpending
         key={'item' + index}
@@ -100,7 +101,6 @@ export default class ExpensePage extends Component {
         startDate={bill.startDate.toLocaleDateString()}
       />
     ))
-    console.log(this.state.totalSpendAmount)
     return (
       <div>
         <Modal
@@ -137,47 +137,68 @@ export default class ExpensePage extends Component {
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
-              <h3>Amount:</h3>
+              <h3>AMOUNT:</h3>
               <input
                 type="text"
                 value={this.state.amount}
                 onChange={this.handleAmountChange}
               ></input>
-              <h3>Description:</h3>
+              <h3>DESCRIPTION:</h3>
               <input
                 type="text"
                 value={this.state.description}
                 onChange={this.handleDescriptionChange}
               ></input>
-              <h3>Date:</h3>
+              <h3>DATE:</h3>
               <DatePicker
                 selected={this.state.startDate}
                 value={this.state.startDate}
                 onChange={(date) => this.setStartDate(date)}
               />
               <br></br>
+              <br></br>
+              <br></br>
               <Button
+                className="saveBtn"
                 type="submit"
                 value="submit"
                 onClick={() => this.handleClose()}
               >
-                Save
+                SAVE
               </Button>
             </form>
           </Modal.Body>
         </Modal>
         <div className="expensePage">
-          <h1>
-            Total Expense:<br></br>
-            {this.state.totalAmount}
+          <div className="navBar">
+            <span className="navBox">
+              <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
+                <h2 className="navTag">Dashboard</h2>
+              </NavLink>
+              <NavLink
+                to="/dashboard/income"
+                style={{ textDecoration: 'none' }}
+              >
+                <h2 className="navTag">INCOME</h2>
+              </NavLink>
+              <NavLink
+                to="/dashboard/investment"
+                style={{ textDecoration: 'none' }}
+              >
+                <h2 className="navTag">INVESTMENT</h2>
+              </NavLink>
+            </span>
+          </div>
+          <h1 className="total" style={{ color: 'grey' }}>
+            TOTAL EXPENSE:<br></br>$ {this.state.totalAmount}
           </h1>
           <div className="box">
             <div className="box1">
-              <h3>Spending</h3>
+              <h2 style={{ color: 'white' }}>SPENDING</h2>
               {amounts}
             </div>
             <div className="box2">
-              <h3>Bill</h3>
+              <h2 style={{ color: 'white' }}>BILL</h2>
               {bills}
             </div>
           </div>
@@ -188,6 +209,42 @@ export default class ExpensePage extends Component {
           >
             +
           </Button>
+        </div>
+        <div className="pieChart">
+          <PieChart
+            size={350}
+            innerHoleSize={320}
+            data={[
+              {
+                key: 'Expense',
+                value: this.state.totalAmount,
+                color: 'rgb(174, 32, 179)'
+              },
+              {
+                key: 'Income',
+                value: this.props.totalIncomeAmount,
+                color: 'rgba(0, 255, 255, 0.678)'
+              }
+            ]}
+          />
+        </div>
+        <div className="pieChartCopy">
+          <PieChart
+            size={350}
+            innerHoleSize={320}
+            data={[
+              {
+                key: 'Expense',
+                value: 1,
+                color: 'rgba(128, 128, 128, 0.397)'
+              },
+              {
+                key: 'Income',
+                value: 0,
+                color: 'rgba(0, 255, 255, 0.678)'
+              }
+            ]}
+          />
         </div>
       </div>
     )

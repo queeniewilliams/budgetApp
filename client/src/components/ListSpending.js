@@ -71,7 +71,7 @@ export default class ListSpending extends Component {
     return (
       <div>
         {!this.state.trackDeleted ? (
-          <div className="listSpending">
+          <div className="list">
             <h2>$ {this.props.amount}</h2>
             <h3>{this.props.description}</h3>
             <h4>{this.props.startDate}</h4>

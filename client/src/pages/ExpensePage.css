@@ -2,20 +2,82 @@
   position: relative;
   display: flex;
   height: 100vh;
-  background-color: rgb(7, 7, 49);
+  background-color: rgb(16, 16, 37);
 }
-
+.incomePage {
+  display: flex;
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(24, 49, 131, 0.678),
+    rgba(150, 29, 120, 0.699)
+  );
+}
+.investmentPage {
+  display: flex;
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(117, 74, 197, 0.678),
+    rgb(31, 9, 59)
+  );
+}
+.navBar {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  background-color: rgb(22, 22, 51);
+  padding: 20px;
+  border: 1px rgba(39, 39, 83, 0.568) solid;
+}
+.navBox {
+  grid-row: 2;
+}
+.navTag {
+  font-size: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.navTag:hover {
+  background-color: rgba(128, 128, 128, 0.397);
+}
 .modal-dialog.modal {
-  background-color: cornsilk;
+  color: aliceblue;
+  background-color: rgba(11, 24, 65, 0.74);
   position: absolute;
   top: 20%;
   left: 30%;
-  width: 400px;
-  height: 500px;
+  width: 500px;
+  height: 600px;
   text-align: center;
+  border: 2px solid #c71e9d;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 4px #c71e9d;
+  -moz-box-shadow: 0px 0px 4px #c71e9d;
+  box-shadow: 0px 0px 4px #c71e9d;
+}
+.saveBtn {
+  padding: 15px;
+  width: 10vw;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 30px;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(71, 198, 230, 0.856),
+    rgba(180, 55, 149, 0.699)
+  );
+}
+.total {
+  position: absolute;
+  left: 23%;
+  top: 20%;
 }
 .box {
-  margin-left: 35vw;
+  margin-left: 32vw;
   /* margin-right: 0; */
 }
 .box1 {
@@ -40,16 +102,7 @@
   height: 40vh;
   margin: 20px;
 }
-.listSpending {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr; */
-  display: flex;
-  justify-content: space-around;
-  width: 700px;
-  align-items: center;
-}
-.listbill {
+.list {
   display: flex;
   justify-content: space-around;
   width: 700px;
@@ -69,21 +122,29 @@
 }
 .closeBtn {
   float: right;
-  margin-right: 0;
+  margin-right: 10px;
+  padding: 15px 20px 15px 20px;
+  border-radius: 50px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-weight: bold;
 }
 h1 {
   color: aliceblue;
-  /* margin: auto; */
 }
 h2 {
   font-size: 25px;
-  /* margin-top: -15px; */
 }
 h3 {
   font-size: 20px;
 }
 h4 {
   font-size: 15px;
+}
+h5 {
+  font-size: 30px;
+  margin: 30px;
 }
 .icons {
   z-index: 2;
@@ -99,4 +160,29 @@ h4 {
 .pieChart {
   position: absolute;
   top: 50%;
+  left: 18%;
+}
+.pieChartCopy {
+  position: absolute;
+  top: 50%;
+  left: 18%;
+}
+input {
+  padding: 10px;
+  width: 15vw;
+  border: 2px solid #4cc6ff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 4px #4cc6ff;
+  -moz-box-shadow: 0px 0px 4px #4cc6ff;
+  box-shadow: 0px 0px 4px #4cc6ff;
+}
+.incomeBox {
+  background-color: rgba(10, 11, 58, 0.164);
+  border-radius: 10px;
+  width: 70vw;
+  height: 80vh;
+  margin-top: 50px;
+  margin-left: 100px;
 }

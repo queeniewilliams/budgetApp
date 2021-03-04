@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
+import { NavLink } from 'react-router-dom'
 
 export default class InvestmentPage extends Component {
   constructor() {
@@ -70,8 +71,6 @@ export default class InvestmentPage extends Component {
     ))
     return (
       <div>
-        <div>Total Investment:</div>
-        <p style={{ color: 'red' }}>{this.state.totalAmount}</p>
         <Modal
           dialogClassName="modal"
           show={this.state.show}
@@ -104,7 +103,10 @@ export default class InvestmentPage extends Component {
                 onChange={(date) => this.setStartDate(date)}
               />
               <br></br>
+              <br></br>
+              <br></br>
               <Button
+                className="saveBtn"
                 type="submit"
                 value="submit"
                 onClick={() => this.handleClose()}
@@ -115,7 +117,29 @@ export default class InvestmentPage extends Component {
           </Modal.Body>
         </Modal>
         <div className="investmentPage">
-          <div>{amounts}</div>
+          <div className="navBar">
+            <span className="navBox">
+              <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
+                <h2 className="navTag">Dashboard</h2>
+              </NavLink>
+              <NavLink
+                to="/dashboard/expense"
+                style={{ textDecoration: 'none' }}
+              >
+                <h2 className="navTag">EXPENSE</h2>
+              </NavLink>
+              <NavLink
+                to="/dashboard/income"
+                style={{ textDecoration: 'none' }}
+              >
+                <h2 className="navTag">INCOME</h2>
+              </NavLink>
+            </span>
+          </div>
+          <div className="incomeBox">
+            <h2>TOTAL INVESTMENT: ${this.state.totalAmount}</h2>
+            {amounts}
+          </div>
         </div>
         <Button
           className="spendBtn"

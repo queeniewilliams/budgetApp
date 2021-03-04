@@ -11,7 +11,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      totalAmount: 0
+      totalExpenseAmount: 0,
+      totalIncomeAmount: 0
     }
   }
   render() {
@@ -25,10 +26,22 @@ class App extends Component {
             <Route
               path="/dashboard/expense"
               render={(props) => (
-                <ExpensePage {...props} totalAmount={this.state.totalAmount} />
+                <ExpensePage
+                  {...props}
+                  totalExpenseAmount={this.state.totalExpenseAmount}
+                  totalIncomeAmount={this.state.totalIncomeAmount}
+                />
               )}
             />
-            <Route path="/dashboard/income" component={IncomePage} />
+            <Route
+              path="/dashboard/income"
+              render={(props) => (
+                <IncomePage
+                  {...props}
+                  totalIncomeAmount={this.state.totalIncomeAmount}
+                />
+              )}
+            />
             <Route path="/dashboard/investment" component={InvestmentPage} />
           </Switch>
         </main>

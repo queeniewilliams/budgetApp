@@ -5,7 +5,6 @@ export default class Income extends Component {
     return (
       <div>
         <h1>Income</h1>
-        {/* <BarChart /> */}
       </div>
     )
   }
