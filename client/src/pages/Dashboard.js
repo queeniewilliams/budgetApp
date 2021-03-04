@@ -6,99 +6,100 @@ import Investment from '../components/Investment'
 import History from '../components/History'
 import { NavLink } from 'react-router-dom'
 import { PieChart } from 'react-easy-chart'
-import axios from 'axios'
-import { BASE_URL } from '../globals'
+import { propTypes } from 'react-bootstrap/esm/Image'
+// import axios from 'axios'
+// import { BASE_URL } from '../globals'
 
 export default class Dashboard extends Component {
-  constructor() {
-    super()
-    this.state = {
-      balance: 0,
-      totalIncome: 0,
-      totalExpense: 0,
-      totalInvestment: 0,
-      expensesArr: [],
-      recentExpense: []
-    }
-  }
-  componentDidMount(e) {
-    this.getAllExpenses()
-    //this one works
-    this.getAllIncome()
-    //this one works
-    this.getAllInvestment()
-    //this one works
-    console.log(this.state)
-  }
-  getAllExpenses = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/expenses`)
-      let expenses = response.data.expenses
-      console.log(expenses)
-      this.calcExpenses(expenses)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     balance: 0,
+  //     totalIncome: 0,
+  //     totalExpense: 0,
+  //     totalInvestment: 0,
+  //     expensesArr: props.expensesArr,
+  //     recentExpense: []
+  //   }
+  // }
+  // componentDidMount(e) {
+  //   // this.getAllExpenses()
+  //   //this one works
+  //   // this.getAllIncome()
+  //   //this one works
+  //   // this.getAllInvestment()
+  //   //this one works
+  //   console.log(this.state)
+  // }
+  // getAllExpenses = async () => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/expenses`)
+  //     let expenses = response.data.expenses
+  //     console.log(expenses)
+  //     this.calcExpenses(expenses)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  calcExpenses = (expenses) => {
-    // console.log(expenses)
-    const expenseAmounts = expenses.map((expense) => parseFloat(expense.amount))
-    const reducer = (accumulator, currentValue) => accumulator + currentValue
-    const total = expenseAmounts.reduce(reducer)
+  // calcExpenses = (expenses) => {
+  //   // console.log(expenses)
+  //   const expenseAmounts = expenses.map((expense) => parseFloat(expense.amount))
+  //   const reducer = (accumulator, currentValue) => accumulator + currentValue
+  //   const total = expenseAmounts.reduce(reducer)
 
-    this.setState({
-      totalExpense: total,
-      recentExpense: expenses,
-      expensesArr: expenseAmounts
-    })
-  }
+  //   this.setState({
+  //     totalExpense: total,
+  //     recentExpense: expenses,
+  //     expensesArr: expenseAmounts
+  //   })
+  // }
 
-  getAllIncome = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/income`)
-      // console.log(response.data)
-      let incomes = response.data.incomes
-      this.calcIncome(incomes)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // getAllIncome = async () => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/income`)
+  //     // console.log(response.data)
+  //     let incomes = response.data.incomes
+  //     this.calcIncome(incomes)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  calcIncome = (incomes) => {
-    console.log(this.state)
-    const incomeArr = incomes.map((income) => income.amount)
-    const reducer = (accumulator, currentValue) =>
-      parseFloat(accumulator) + parseFloat(currentValue)
-    const total = incomeArr.reduce(reducer)
-    const balance = total - this.state.totalExpense
-    // console.log(incomeArr)
-    this.setState({
-      totalIncome: total,
-      balance: balance
-    })
-  }
+  // calcIncome = (incomes) => {
+  //   console.log(this.state)
+  //   const incomeArr = incomes.map((income) => income.amount)
+  //   const reducer = (accumulator, currentValue) =>
+  //     parseFloat(accumulator) + parseFloat(currentValue)
+  //   const total = incomeArr.reduce(reducer)
+  //   const balance = total - this.state.totalExpense
+  //   // console.log(incomeArr)
+  //   this.setState({
+  //     totalIncome: total,
+  //     balance: balance
+  //   })
+  // }
 
-  getAllInvestment = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/investments`)
-      // console.log(response.data)
-      let investments = response.data.investments
-      this.calcInvestment(investments)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // getAllInvestment = async () => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/investments`)
+  //     // console.log(response.data)
+  //     let investments = response.data.investments
+  //     this.calcInvestment(investments)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  calcInvestment = (investments) => {
-    const investmentArr = investments.map((investment) => investment.amount)
-    // console.log(investmentArr)
-    const reducer = (accumulator, currentValue) =>
-      parseFloat(accumulator) + parseFloat(currentValue)
-    const total = investmentArr.reduce(reducer)
-    this.setState({ totalInvestment: total })
-    console.log(this.state)
-  }
+  // calcInvestment = (investments) => {
+  //   const investmentArr = investments.map((investment) => investment.amount)
+  //   // console.log(investmentArr)
+  //   const reducer = (accumulator, currentValue) =>
+  //     parseFloat(accumulator) + parseFloat(currentValue)
+  //   const total = investmentArr.reduce(reducer)
+  //   this.setState({ totalInvestment: total })
+  //   console.log(this.state)
+  // }
 
   // sortDateDsc = (a, b) => {
   //   let dateA = new Date(a.date)
@@ -110,16 +111,16 @@ export default class Dashboard extends Component {
   // }
 
   render() {
-    const expenseList = this.state.recentExpense.map((item, index) => (
+    console.log(this.props.recentExpense)
+    const expenseList = this.props.recentExpense.map((item, index) => (
       <History
-        // key={'item' + index}
+        key={'item' + index}
         amount={item.amount}
         description={item.description}
-        date={item.date}
+        date={item.startDate}
       />
     ))
     console.log(expenseList)
-    console.log(this.state.recentExpense)
     return (
       <div>
         <div className="container">
@@ -128,16 +129,14 @@ export default class Dashboard extends Component {
             className="income"
             style={{ textDecoration: 'none' }}
           >
-            <Income />
+            <Income data={this.props.incomeArr} />
           </NavLink>
           <NavLink
             to="/dashboard/expense"
             className="expense"
             style={{ textDecoration: 'none' }}
           >
-            {this.state.expensesArr.length && (
-              <Expense data={this.state.expensesArr} />
-            )}
+            <Expense data={this.props.expensesArr} />
           </NavLink>
           <NavLink
             to="/dashboard/investment"
@@ -151,6 +150,7 @@ export default class Dashboard extends Component {
               <img
                 className="homeIcon"
                 src="https://i.ibb.co/YDZX973/toppng-com-hombutton-white-home-button-479x388.png"
+                alt="homeIcon"
                 width="70px"
               />
             </NavLink>
@@ -160,17 +160,17 @@ export default class Dashboard extends Component {
               data={[
                 {
                   key: 'Expense',
-                  value: this.state.totalExpense,
+                  value: this.props.totalExpenseAmount,
                   color: 'rgb(174, 32, 179)'
                 },
                 {
                   key: 'Income',
-                  value: this.state.totalIncome,
+                  value: this.props.totalIncomeAmount,
                   color: 'rgba(0, 255, 255, 0.678)'
                 },
                 {
                   key: 'Investment',
-                  value: this.state.totalInvestment,
+                  value: this.props.totalInvestmentAmount,
                   color: 'rgb(241, 135, 47'
                 }
               ]}
@@ -178,18 +178,18 @@ export default class Dashboard extends Component {
             <h5
               className="balanceAmount"
               style={
-                this.state.balance > 0 ? { color: 'green' } : { color: 'red' }
+                this.props.balance > 0 ? { color: 'green' } : { color: 'red' }
               }
             >
-              Balance: ${this.state.balance}
+              Balance: ${this.props.balance}
             </h5>
             <div className="lists">
               <h6>Income</h6>
-              <h7>'</h7>
+              <h6 className="incomeDot">'</h6>
               <h6>Expense</h6>
-              <h8>'</h8>
+              <h6 className="expenseDot">'</h6>
               <h6>Investment</h6>
-              <h9>'</h9>
+              <h6 className="investmentDot">'</h6>
             </div>
           </div>
           <div className="history">{expenseList}</div>

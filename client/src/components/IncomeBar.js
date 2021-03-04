@@ -1,7 +1,7 @@
 import React from 'react'
 import * as d3 from 'd3'
 
-class BarChart extends React.Component {
+class IncomeBar extends React.Component {
   componentDidMount() {
     console.log(this.props)
     const dataset = this.props.data
@@ -18,11 +18,11 @@ class BarChart extends React.Component {
       .data(dataset)
       .enter()
       .append('rect')
-      .attr('fill', 'grey')
+      .attr('fill', '#c71e9d')
       .attr('class', 'sBar')
       .attr('x', (d, i) => i * 25)
       .attr('y', (d, i) => {
-        return h - 0.1 * d
+        return h - 0.05 * d
       })
       .attr('width', 20)
       .attr('height', (d, i) => 7 * d)
@@ -36,7 +36,7 @@ class BarChart extends React.Component {
       .style('font-size', 18)
       .attr('fill', 'grey')
       .attr('x', (d, i) => i * 25)
-      .attr('y', (d, i) => h - 0.1 * d - 3)
+      .attr('y', (d, i) => h - 0.05 * d - 3)
       .text((d) => d)
   }
   render() {
@@ -49,4 +49,4 @@ class BarChart extends React.Component {
     return this.props.data && <div ref="chart" style={styles.container}></div>
   }
 }
-export default BarChart
+export default IncomeBar

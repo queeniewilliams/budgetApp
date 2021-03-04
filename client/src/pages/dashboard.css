@@ -79,7 +79,7 @@ h6 {
   font-size: 20px;
   margin: 5px;
 }
-h7 {
+.incomeDot {
   padding: 5px 12px 5px 12px;
   background-color: rgba(0, 255, 255, 0.678);
   color: rgba(0, 255, 255, 0);
@@ -87,7 +87,7 @@ h7 {
   width: 2px;
   height: 16px;
 }
-h8 {
+.expenseDot {
   padding: 5px 12px 5px 12px;
   background-color: rgb(174, 32, 179);
   color: rgba(0, 255, 255, 0);
@@ -95,7 +95,7 @@ h8 {
   width: 2px;
   height: 16px;
 }
-h9 {
+.investmentDot {
   padding: 5px 12px 5px 12px;
   background-color: rgb(241, 135, 47);
   color: rgba(0, 255, 255, 0);
@@ -111,4 +111,34 @@ h9 {
   position: absolute;
   bottom: 40%;
   left: 4%;
+}
+.barChart1 {
+  position: absolute;
+  bottom: 72%;
+  left: 10%;
+}
+.recentTrans {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  width: 400px;
+  height: 8vh;
+  align-items: center;
+}
+.recentDes {
+  font-size: 18px;
+  color: white;
+  height: 0;
+  margin: 0;
+}
+.recentDate {
+  font-size: 10px;
+  color: grey;
+  margin: 0;
+}
+.recentAmount {
+  font-size: 20px;
+  margin: 0;
+  height: 0;
 }

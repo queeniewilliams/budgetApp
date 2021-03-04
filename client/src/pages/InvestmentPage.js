@@ -9,14 +9,14 @@ import { NavLink } from 'react-router-dom'
 import { animations } from 'react-animation'
 
 export default class InvestmentPage extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       amount: '',
       description: '',
       investmentList: [],
       show: false,
-      totalAmount: 0,
+      totalAmount: this.props.totalInvestmentAmount,
       startDate: new Date()
     }
   }

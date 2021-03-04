@@ -10,8 +10,8 @@ export default class ListSpending extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      amount: '',
-      description: '',
+      amount: props.amount || '',
+      description: props.description || '',
       totalSpend: [],
       totalBill: [],
       totalAmount: this.props.totalAmount,
@@ -22,6 +22,7 @@ export default class ListSpending extends Component {
       trackEdited: false
     }
   }
+  componentDidMount = () => {}
   setStartDate = (date) => this.setState({ startDate: date })
   handleClose = () => this.setState({ show: false })
   handleShow = () => this.setState({ show: true })
@@ -53,13 +54,13 @@ export default class ListSpending extends Component {
           startDate: this.state.startDate.toLocaleDateString()
         }
       )
+      console.log(response.data.startDate)
       this.setState({
-        amount: this.state.amount,
-        description: this.state.description,
-        startDate: this.state.startDate.toLocaleDateString(),
+        amount: response.data.amount,
+        description: response.data.description,
+        startDate: response.data.startDate,
         trackEdited: true
       })
-      console.log(response.data)
       return response.data
     } catch (error) {
       console.log('error')
@@ -72,8 +73,8 @@ export default class ListSpending extends Component {
       <div>
         {!this.state.trackDeleted ? (
           <div className="list">
-            <h2>$ {this.props.amount}</h2>
-            <h3>{this.props.description}</h3>
+            <h2>$ {this.state.amount}</h2>
+            <h3>{this.state.description}</h3>
             <h4>{this.props.startDate}</h4>
             <div className="icons">
               <Button className="deleteBtn" onClick={() => this.handleDelete()}>
