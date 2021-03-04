@@ -10,6 +10,7 @@ import { BASE_URL } from '../globals'
 import axios from 'axios'
 import { PieChart } from 'react-easy-chart'
 import { NavLink } from 'react-router-dom'
+import { animations } from 'react-animation'
 
 export default class ExpensePage extends Component {
   constructor(props) {
@@ -170,7 +171,12 @@ export default class ExpensePage extends Component {
           </Modal.Body>
         </Modal>
         <div className="expensePage">
-          <div className="navBar">
+          <div
+            className="navBar"
+            style={{
+              animation: animations.slideIn
+            }}
+          >
             <span className="navBox">
               <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
                 <h2 className="navTag">Dashboard</h2>
