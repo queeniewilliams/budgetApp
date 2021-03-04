@@ -54,8 +54,8 @@ export default class ExpensePage extends Component {
         newBill.push({
           amount: this.state.amount,
           description: this.state.description,
-          startDate: this.state.startDate
-          // billId:response.data.expenseItem._id
+          startDate: this.state.startDate,
+          billId:response.data.expenseItem._id
         })
       } else {
         newSpend.push({
@@ -96,6 +96,7 @@ export default class ExpensePage extends Component {
         key={'bill' + index}
         amount={bill.amount}
         description={bill.description}
+        billId={bill.billId}
         startDate={bill.startDate.toLocaleDateString()}
       />
     ))
