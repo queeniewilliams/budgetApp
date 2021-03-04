@@ -128,6 +128,7 @@ class App extends Component {
                   {...props}
                   totalExpenseAmount={this.state.totalExpenseAmount}
                   totalIncomeAmount={this.state.totalIncomeAmount}
+                  balance={this.state.balance}
                 />
               )}
             />

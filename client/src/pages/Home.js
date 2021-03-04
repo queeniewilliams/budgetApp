@@ -2,8 +2,15 @@ import React, { Component } from 'react'
 import '../App.css'
 import { animations } from 'react-animation'
 import { NavLink } from 'react-router-dom'
+import Moment from 'react-moment'
 
 export default class Home extends Component {
+  constructor() {
+    super()
+    this.state = {
+      dateToFormat: new Date('2021-03-05')
+    }
+  }
   render() {
     return (
       <div>
@@ -40,6 +47,12 @@ export default class Home extends Component {
           width="100%"
           height="825vh"
         />
+        <Moment className="moment1" format="MMM">
+          {this.state.dateToFormat}
+        </Moment>
+        <Moment className="moment2" format="DD">
+          {this.state.dateToFormat}
+        </Moment>
       </div>
     )
   }

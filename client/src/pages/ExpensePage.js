@@ -261,6 +261,13 @@ export default class ExpensePage extends Component {
             ]}
           />
         </div>
+        <div className="balanceAmount1">BALANCE: ${this.props.balance}</div>
+        <div className="eilists">
+          <h6>Income</h6>
+          <h6 className="incomeDot">'</h6>
+          <h6>Expense</h6>
+          <h6 className="expenseDot">'</h6>
+        </div>
         {/* <div className="pieChartCopy">
           <PieChart
             size={350}

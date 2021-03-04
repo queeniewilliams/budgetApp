@@ -131,6 +131,7 @@
   font-weight: bold;
 }
 h1 {
+  font-size: 30px;
   color: aliceblue;
 }
 h2 {
@@ -185,4 +186,21 @@ input {
   height: 80vh;
   margin-top: 50px;
   margin-left: 100px;
+}
+.balanceAmount1 {
+  position: absolute;
+  color: rgb(236, 219, 70);
+  font-weight: bold;
+  top: 70%;
+  left: 23%;
+  font-size: 1.5em;
+}
+.eilists {
+  position: absolute;
+  top: 85%;
+  left: 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
 }

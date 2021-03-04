@@ -4,7 +4,7 @@ export default class Investment extends Component {
   render() {
     return (
       <div>
-        <h1>Investment</h1>
+        <h1>INVESTMENT</h1>
         <div className="barChart2">
           <InvestmentBar data={this.props.data} />
         </div>
