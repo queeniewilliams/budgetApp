@@ -128,7 +128,7 @@ export default class Dashboard extends Component {
             className="income"
             style={{ textDecoration: 'none' }}
           >
-            <Income />
+            <Income data={this.state.expensesArr} />
           </NavLink>
           <NavLink
             to="/dashboard/expense"

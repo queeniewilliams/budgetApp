@@ -5,7 +5,7 @@ class BarChart extends React.Component {
   componentDidMount() {
     console.log(this.props)
     const dataset = this.props.data
-    const w = 200
+    const w = 500
     const h = 500
     const svg = d3
       .select(this.refs.chart)
@@ -22,7 +22,7 @@ class BarChart extends React.Component {
       .attr('class', 'sBar')
       .attr('x', (d, i) => i * 25)
       .attr('y', (d, i) => {
-        return h - 7 * d
+        return h - 1 * d
       })
       .attr('width', 20)
       .attr('height', (d, i) => 7 * d)
@@ -32,11 +32,11 @@ class BarChart extends React.Component {
       .selectAll('text')
       .data(dataset)
       .enter()
-      .append('text')
+      .append()
       .style('font-size', 18)
       .attr('fill', 'grey')
       .attr('x', (d, i) => i * 25)
-      .attr('y', (d, i) => h - 7 * d - 3)
+      .attr('y', (d, i) => h - 1 * d - 3)
       .text((d) => d)
   }
   render() {

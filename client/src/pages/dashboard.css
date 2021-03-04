@@ -107,3 +107,8 @@ h9 {
   position: absolute;
   top: 50%;
 }
+.barChart {
+  position: absolute;
+  bottom: 40%;
+  left: 4%;
+}
