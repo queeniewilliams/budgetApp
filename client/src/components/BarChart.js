@@ -5,7 +5,7 @@ class BarChart extends React.Component {
   componentDidMount() {
     console.log(this.props)
     const dataset = this.props.data
-    const w = 700
+    const w = 200
     const h = 500
     const svg = d3
       .select(this.refs.chart)

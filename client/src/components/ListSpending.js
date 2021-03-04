@@ -17,7 +17,8 @@ export default class ListSpending extends Component {
       totalAmount: this.props.totalAmount,
       show: false,
       startDate: this.props.startDate,
-      id: ''
+      id: '',
+      trackDeleted: false
     }
   }
   setStartDate = (date) => this.setState({ startDate: date })
@@ -29,16 +30,16 @@ export default class ListSpending extends Component {
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value })
   }
-  componentDidMount = () => {
-    this.handleDelete()
-  }
-  handleDelete = (id) => {
-    axios.delete(`${BASE_URL}/expenses/remove/${id}`)
+  // componentDidMount = () => {
+  //   // this.handleDelete()
+  // }
+  handleDelete = () => {
+    axios.delete(`${BASE_URL}/expenses/remove/${this.props.spendId}`)
     this.setState({
       amount: '',
       description: '',
       startDate: '',
-      id: ''
+      trackDeleted: true
     })
     console.log('i did it')
   }
@@ -63,76 +64,76 @@ export default class ListSpending extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
-        <div className="listSpending">
-          <h3>{this.props.description}</h3>
-          <h2>$ {this.props.amount}</h2>
-          <h4>{this.props.startDate}</h4>
-          <div className="icons">
-            <Button
-              className="deleteBtn"
-              onClick={(id) => this.handleDelete(id)}
-            >
-              <img
-                src="https://i.ibb.co/BjQrJmR/Seek-Png-com-edit-icon-png-2022743.png"
-                alt="deleteIcon"
-                width="30px"
-                height="30px"
-              />
-            </Button>
-            <Button className="editBtn" onClick={() => this.handleShow()}>
-              <img
-                src="https://i.ibb.co/st2BVhL/pngfind-com-edit-icon-png-704605.png"
-                alt="editIcon"
-                width="30px"
-                height="30px"
-              />
-            </Button>
-            <Modal
-              dialogClassName="modal"
-              show={this.state.show}
-              onHide={() => this.handleClose()}
-            >
-              <Button className="closeBtn" onClick={() => this.handleClose()}>
-                X
+        {!this.state.trackDeleted ? (
+          <div className="listSpending">
+            <h3>{this.props.description}</h3>
+            <h2>$ {this.props.amount}</h2>
+            <h4>{this.props.startDate}</h4>
+            <div className="icons">
+              <Button className="deleteBtn" onClick={() => this.handleDelete()}>
+                <img
+                  src="https://i.ibb.co/BjQrJmR/Seek-Png-com-edit-icon-png-2022743.png"
+                  alt="deleteIcon"
+                  width="30px"
+                  height="30px"
+                />
               </Button>
-              <Modal.Header>
-                <h5>EDIT</h5>
-              </Modal.Header>
-              <Modal.Body>
-                <form onSubmit={this.handleSubmit}>
-                  <h3>Amount:</h3>
-                  <input
-                    type="text"
-                    value={this.state.amount}
-                    onChange={this.handleAmountChange}
-                  ></input>
-                  <h3>Description:</h3>
-                  <input
-                    type="text"
-                    value={this.state.description}
-                    onChange={this.handleDescriptionChange}
-                  ></input>
-                  <h3>Date:</h3>
-                  <DatePicker
-                    selected={this.state.startDate}
-                    value={this.state.startDate}
-                    onChange={(date) => this.setStartDate(date)}
-                  />
-                  <br></br>
-                  <Button
-                    type="submit"
-                    value="submit"
-                    onClick={() => this.handleClose()}
-                  >
-                    Save
-                  </Button>
-                </form>
-              </Modal.Body>
-            </Modal>
+              <Button className="editBtn" onClick={() => this.handleShow()}>
+                <img
+                  src="https://i.ibb.co/st2BVhL/pngfind-com-edit-icon-png-704605.png"
+                  alt="editIcon"
+                  width="30px"
+                  height="30px"
+                />
+              </Button>
+              <Modal
+                dialogClassName="modal"
+                show={this.state.show}
+                onHide={() => this.handleClose()}
+              >
+                <Button className="closeBtn" onClick={() => this.handleClose()}>
+                  X
+                </Button>
+                <Modal.Header>
+                  <h5>EDIT</h5>
+                </Modal.Header>
+                <Modal.Body>
+                  <form onSubmit={this.handleSubmit}>
+                    <h3>Amount:</h3>
+                    <input
+                      type="text"
+                      value={this.state.amount}
+                      onChange={this.handleAmountChange}
+                    ></input>
+                    <h3>Description:</h3>
+                    <input
+                      type="text"
+                      value={this.state.description}
+                      onChange={this.handleDescriptionChange}
+                    ></input>
+                    <h3>Date:</h3>
+                    <DatePicker
+                      selected={this.state.startDate}
+                      value={this.state.startDate}
+                      onChange={(date) => this.setStartDate(date)}
+                    />
+                    <br></br>
+                    <Button
+                      type="submit"
+                      value="submit"
+                      onClick={() => this.handleClose()}
+                    >
+                      Save
+                    </Button>
+                  </form>
+                </Modal.Body>
+              </Modal>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     )
   }

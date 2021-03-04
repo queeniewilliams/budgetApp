@@ -44,7 +44,7 @@ export default class ExpensePage extends Component {
         description: this.state.description,
         startDate: this.state.startDate.toLocaleDateString()
       })
-      console.log(response)
+      console.log('here', response)
       const newSpend = this.state.totalSpend
       const newBill = this.state.totalBill
       let newAmount = (
@@ -55,12 +55,14 @@ export default class ExpensePage extends Component {
           amount: this.state.amount,
           description: this.state.description,
           startDate: this.state.startDate
+          // billId:response.data.expenseItem._id
         })
       } else {
         newSpend.push({
           amount: this.state.amount,
           description: this.state.description,
-          startDate: this.state.startDate
+          startDate: this.state.startDate,
+          spendId: response.data.expenseItem._id
         })
       }
       this.setState({
@@ -81,16 +83,17 @@ export default class ExpensePage extends Component {
     console.log(this.state.startDate.toLocaleDateString())
     const amounts = this.state.totalSpend.map((item, index) => (
       <ListSpending
-        key={item._id}
+        key={'item' + index}
         amount={item.amount}
         description={item.description}
         startDate={item.startDate.toLocaleDateString()}
+        spendId={item.spendId}
         handleShow={this.handleShow}
       />
     ))
     const bills = this.state.totalBill.map((bill, index) => (
       <ListBill
-        key={bill}
+        key={'bill' + index}
         amount={bill.amount}
         description={bill.description}
         startDate={bill.startDate.toLocaleDateString()}

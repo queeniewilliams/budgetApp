@@ -34,7 +34,7 @@ export default class Dashboard extends Component {
     try {
       const response = await axios.get(`${BASE_URL}/expenses`)
       let expenses = response.data.expenses
-      // console.log(expenses)
+      console.log(expenses)
       this.calcExpenses(expenses)
     } catch (error) {
       console.log(error)
@@ -162,10 +162,21 @@ export default class Dashboard extends Component {
                   value: this.state.totalIncome,
                   color: 'rgba(0, 255, 255, 0.678)'
                 },
-                { key: 'Investment', value: this.state.totalInvestment }
+                {
+                  key: 'Investment',
+                  value: this.state.totalInvestment,
+                  color: 'rgb(241, 135, 47'
+                }
               ]}
             />
-            <h5 style={{ color: 'white' }}> Balance: ${this.state.balance}</h5>
+            <h5
+              style={
+                this.state.balance > 0 ? { color: 'green' } : { color: 'red' }
+              }
+            >
+              {' '}
+              Balance: ${this.state.balance}
+            </h5>
             <div className="lists">
               <h6>Income</h6>
               <h7>'</h7>
