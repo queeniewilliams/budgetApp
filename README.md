@@ -31,7 +31,7 @@ The project is a MERN stack application, deployed on Heroku. The front-end is de
 
 _User Stories illustrated with a flow chart_
 
-![](https://i.ibb.co/TvW9Qs8/budget-Page-1-copy.png)
+![](https://i.ibb.co/s20R6BH/Blank-diagram.png>)
 
 _ERD_
 
