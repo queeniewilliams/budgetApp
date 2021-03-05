@@ -37,7 +37,6 @@ export default class IncomePage extends Component {
         description: this.state.description,
         startDate: this.state.startDate.toLocaleDateString()
       })
-      console.log(response)
       const newIncomeList = this.state.incomeList
       let newAmount = (
         parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)

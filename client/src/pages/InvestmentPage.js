@@ -37,7 +37,6 @@ export default class InvestmentPage extends Component {
         description: this.state.description,
         startDate: this.state.startDate.toLocaleDateString()
       })
-      console.log(response.data)
       const newInvestmentList = this.state.investmentList
       let newAmount = (
         parseFloat(this.state.amount) + parseFloat(this.state.totalAmount)

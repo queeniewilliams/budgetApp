@@ -51,7 +51,6 @@ export default class ListBill extends Component {
         description: response.data.description,
         startDate: response.data.startDate
       })
-      console.log(this.state)
       return response.data
     } catch (error) {
       console.log('error')
@@ -59,7 +58,6 @@ export default class ListBill extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         {!this.state.trackDeleted ? (

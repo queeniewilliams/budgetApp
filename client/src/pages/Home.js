@@ -8,7 +8,7 @@ export default class Home extends Component {
   constructor() {
     super()
     this.state = {
-      dateToFormat: new Date('2021-03-05')
+      dateToFormat: new Date()
     }
   }
   render() {

@@ -24,7 +24,7 @@ class App extends Component {
       investmentArr: []
     }
   }
-  componentDidMount(e) {
+  componentDidMount() {
     this.getAllExpenses()
     this.getAllIncome()
     this.getAllInvestment()
@@ -33,7 +33,6 @@ class App extends Component {
     try {
       const response = await axios.get(`${BASE_URL}/expenses`)
       let expenses = response.data.expenses
-      console.log(expenses)
       this.calcExpenses(expenses)
     } catch (error) {
       console.log(error)
@@ -53,7 +52,6 @@ class App extends Component {
   getAllIncome = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/income`)
-      // console.log(response.data)
       let incomes = response.data.incomes
       this.calcIncome(incomes)
     } catch (error) {
@@ -62,7 +60,6 @@ class App extends Component {
   }
 
   calcIncome = (incomes) => {
-    console.log(this.state)
     const incomeArr = incomes.map((income) => income.amount)
     const reducer = (accumulator, currentValue) =>
       parseFloat(accumulator) + parseFloat(currentValue)
@@ -96,7 +93,6 @@ class App extends Component {
     })
   }
   render() {
-    console.log(this.state.totalInvestmentAmount)
     return (
       <div className="App">
         <main>

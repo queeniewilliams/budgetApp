@@ -23,7 +23,8 @@ export default class ExpensePage extends Component {
       totalAmount: this.props.totalExpenseAmount,
       show: false,
       checked: false,
-      startDate: new Date()
+      startDate: new Date(),
+      balance: props.balance
     }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
@@ -47,7 +48,6 @@ export default class ExpensePage extends Component {
         description: this.state.description,
         startDate: this.state.startDate.toLocaleDateString()
       })
-      console.log('here', response)
       const newSpend = this.state.totalSpend
       const newBill = this.state.totalBill
       let newAmount = (
@@ -69,13 +69,15 @@ export default class ExpensePage extends Component {
           spendId: response.data.expenseItem._id
         })
       }
+      let newBalance = this.state.balance - this.state.amount
       this.setState({
         amount: '',
         description: '',
         startDate: new Date(),
         totalSpend: newSpend,
         totalBill: newBill,
-        totalAmount: newAmount
+        totalAmount: newAmount,
+        balance: newBalance
       })
       return response.data
     } catch (error) {
@@ -240,7 +242,7 @@ export default class ExpensePage extends Component {
             ]}
           />
         </div>
-        <div className="balanceAmount1">BALANCE: ${this.props.balance}</div>
+        <div className="balanceAmount1">BALANCE: ${this.state.balance}</div>
         <div className="eilists">
           <h6>Income</h6>
           <h6 className="incomeDot">'</h6>

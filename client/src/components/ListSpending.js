@@ -48,7 +48,6 @@ export default class ListSpending extends Component {
           startDate: this.state.startDate.toLocaleDateString()
         }
       )
-      console.log(response.data.startDate)
       this.setState({
         amount: response.data.amount,
         description: response.data.description,
@@ -61,7 +60,6 @@ export default class ListSpending extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         {!this.state.trackDeleted ? (
