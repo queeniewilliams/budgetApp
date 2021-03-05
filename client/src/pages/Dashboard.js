@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './dashboard.css'
+import '../css/dashboard.css'
 import Expense from '../components/Expense'
 import Income from '../components/Income'
 import Investment from '../components/Investment'

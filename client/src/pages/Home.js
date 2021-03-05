@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../App.css'
+import '../css/App.css'
 import { animations } from 'react-animation'
 import { NavLink } from 'react-router-dom'
 import Moment from 'react-moment'

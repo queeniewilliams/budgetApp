@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import ListSpending from '../components/ListSpending'
-import './ExpensePage.css'
+import '../css/ExpensePage.css'
 import Switch from 'react-switch'
 import ListBill from '../components/ListBill'
 import DatePicker from 'react-datepicker'

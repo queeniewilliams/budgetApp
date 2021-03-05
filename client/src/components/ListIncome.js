@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../pages/ExpensePage.css'
+import '../css/ExpensePage.css'
 import { Modal, Button } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
