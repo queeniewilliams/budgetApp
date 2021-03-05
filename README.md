@@ -78,3 +78,15 @@ _Hierarchy Diagram_
 ### **Express**
 
 ### **MongoDB**
+
+---
+
+## **FUTURE UPDATE**
+
+---
+
+- [ ] sort data by month/year && displaying on charts
+- [ ] add user authorization
+- [ ] being able to connect to bank/investment accounts && tracking income and expenses
+- [ ] add credit score monitoring
+- [ ] add tax filling
