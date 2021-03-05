@@ -39,7 +39,7 @@ _User Stories illustrated with Wireframe_
 
 ## **[Trello](https://trello.com/b/cYPYjPvp/fincloud)**
 
-## **[FinCloud](https://localhost:3000)**
+## **[FinCloud](http://localhost:3000)**
 
 - Build up files/contents structure & Layout
 - Write methods for expense tracker
