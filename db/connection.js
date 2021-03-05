@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 const mongoDB = 'mongodb://127.0.0.1/my_database'
-// require('dotenv').config()
+require('dotenv').config()
+let dbUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.MONGODB_URI
+    : 'mongodb://127.0.0.1:27017/todo_tracker'
 
 mongoose
-  .connect(mongoDB, {
+  .connect(dbUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useFindAndModify: true
