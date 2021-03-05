@@ -29,7 +29,7 @@ The project is a MERN stack application, deployed on Heroku. The front-end is de
 - Get an overview of incomes and expenses: All transactions of the user are accumulated to the daily, weekly and monthly total sum and visualized as a histogram. The user then gets a better understanding of the weekly, monthly and yearly fluctuation of incomes and expenses.
   ***
 
-_User Stories illustrated with a flow chart_
+_User Stories illustrated with Wireframe_
 
 ![](https://i.ibb.co/s20R6BH/Blank-diagram.png>)
 
