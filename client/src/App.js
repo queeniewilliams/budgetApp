@@ -78,7 +78,6 @@ class App extends Component {
   getAllInvestment = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/investments`)
-      // console.log(response.data)
       let investments = response.data.investments
       this.calcInvestment(investments)
     } catch (error) {

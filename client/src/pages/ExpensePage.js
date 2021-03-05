@@ -27,9 +27,7 @@ export default class ExpensePage extends Component {
     }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
-  // componentDidMount(e) {
-  //   this.getAllExpenses()
-  // }
+
   setStartDate = (date) => this.setState({ startDate: date })
   handleSwitch = (checked) => this.setState({ checked })
   handleClose = () => this.setState({ show: false })
@@ -84,25 +82,6 @@ export default class ExpensePage extends Component {
       console.log('error')
     }
   }
-  // getAllExpenses = async () => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}/expenses`)
-  //     let expenses = response.data.expenses
-  //     console.log(expenses)
-  //     this.calcExpenses(expenses)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // calcExpenses = (expenses) => {
-  //   const expenseAmounts = expenses.map((expense) => parseFloat(expense.amount))
-  //   const reducer = (accumulator, currentValue) => accumulator + currentValue
-  //   const total = expenseAmounts.reduce(reducer)
-  //   this.setState({
-  //     totalAmount: total.toFixed(2)
-  //   })
-  // }
 
   render() {
     console.log(this.props.totalIncomeAmount, this.state.totalAmount)
@@ -268,24 +247,6 @@ export default class ExpensePage extends Component {
           <h6>Expense</h6>
           <h6 className="expenseDot">'</h6>
         </div>
-        {/* <div className="pieChartCopy">
-          <PieChart
-            size={350}
-            innerHoleSize={320}
-            data={[
-              {
-                key: 'Expense',
-                value: 1,
-                color: 'rgba(128, 128, 128, 0.397)'
-              },
-              {
-                key: 'Income',
-                value: 0,
-                color: 'rgba(0, 255, 255, 0.678)'
-              }
-            ]}
-          /> */}
-        {/* </div> */}
       </div>
     )
   }

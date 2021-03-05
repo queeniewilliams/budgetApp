@@ -12,12 +12,8 @@ export default class ListSpending extends Component {
     this.state = {
       amount: props.amount || '',
       description: props.description || '',
-      totalSpend: [],
-      totalBill: [],
-      totalAmount: this.props.totalAmount,
       show: false,
       startDate: new Date(),
-      id: '',
       trackDeleted: false
     }
   }
@@ -40,7 +36,6 @@ export default class ListSpending extends Component {
       startDate: '',
       trackDeleted: true
     })
-    console.log('i did it')
   }
   handleSubmit = async (e) => {
     e.preventDefault()

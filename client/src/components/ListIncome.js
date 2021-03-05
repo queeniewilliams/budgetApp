@@ -12,12 +12,8 @@ export default class ListIncome extends Component {
     this.state = {
       amount: props.amount || '',
       description: props.description || '',
-      totalSpend: [],
-      totalBill: [],
-      totalAmount: this.props.totalAmount,
       show: false,
       startDate: new Date(),
-      id: '',
       trackDeleted: false
     }
   }
@@ -42,11 +38,14 @@ export default class ListIncome extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      let response = await axios.put(`${BASE_URL}/expenses/update/:id`, {
-        amount: this.state.amount,
-        description: this.state.description,
-        startDate: this.state.startDate.toLocaleDateString()
-      })
+      let response = await axios.put(
+        `${BASE_URL}/income/update/${this.props.incomeId}`,
+        {
+          amount: this.state.amount,
+          description: this.state.description,
+          startDate: this.state.startDate.toLocaleDateString()
+        }
+      )
       this.setState({
         amount: response.data.amount,
         description: response.data.description,
