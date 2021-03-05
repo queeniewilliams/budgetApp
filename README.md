@@ -48,15 +48,20 @@ _Hierarchy Diagram_
 ---
 
 - Build up files/contents structure & Layout
-
-_Home Page Layout_
-
-![](https://i.ibb.co/5RVv4GD/p2.png)
-
 - Write methods for expense tracker
 - Insert methods into Dashboard
 - Build up models, controllers and routes for backend
 - CSS styling
+
+---
+
+## **INSTALLATION**
+
+---
+
+- npx create-react-app client
+- npm install express body-parser cors morgan
+- npm install nodemon --dev
 
 ---
 
