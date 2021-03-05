@@ -9,7 +9,6 @@ import { PieChart } from 'react-easy-chart'
 
 export default class Dashboard extends Component {
   render() {
-    console.log(this.props.recentExpense)
     const expenseList = this.props.recentExpense.map((item, index) => (
       <History
         key={'item' + index}
@@ -26,7 +25,6 @@ export default class Dashboard extends Component {
         date={income.startDate}
       />
     ))
-    console.log(expenseList)
     return (
       <div>
         <div className="container">

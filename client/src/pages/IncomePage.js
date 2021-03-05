@@ -59,6 +59,7 @@ export default class IncomePage extends Component {
       console.log(error)
     }
   }
+
   render() {
     const amounts = this.state.incomeList.map((item, index) => (
       <ListIncome

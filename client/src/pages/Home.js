@@ -26,7 +26,6 @@ export default class Home extends Component {
         </p>
         <div
           className="pBox"
-          durationIn={600}
           style={{
             animation: animations.fadeInUp
           }}

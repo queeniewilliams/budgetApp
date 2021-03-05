@@ -3,7 +3,6 @@ import * as d3 from 'd3'
 
 class InvestmentBar extends React.Component {
   componentDidMount() {
-    console.log(this.props)
     const dataset = this.props.data
     const w = 500
     const h = 200
