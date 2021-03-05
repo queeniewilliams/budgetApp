@@ -86,7 +86,6 @@ export default class ExpensePage extends Component {
   }
 
   render() {
-    console.log(this.props.totalIncomeAmount, this.state.totalAmount)
     const amounts = this.state.totalSpend.map((item, index) => (
       <ListSpending
         key={'item' + index}
