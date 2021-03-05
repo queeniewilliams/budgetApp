@@ -33,19 +33,13 @@ _User Stories illustrated with Wireframe_
 
 ![](https://i.ibb.co/s20R6BH/Blank-diagram.png>)
 
-_ERD_
-
-![](https://i.ibb.co/dQjjjqt/p2-Page-4.png)
-
-_Hierarchy Diagram_
-
-![Hierarchy](https://i.ibb.co/HXsktnd/p2-Page-3.png)
-
 ---
 
 ## **GET STARTED**
 
----
+## **[Trello](https://trello.com/b/cYPYjPvp/fincloud)**
+
+## **[FinCloud](https://trello.com/b/cYPYjPvp/fincloud)**
 
 - Build up files/contents structure & Layout
 - Write methods for expense tracker
@@ -81,7 +75,7 @@ _Hierarchy Diagram_
 
 ---
 
-## **FUTURE UPDATE**
+## **FUTURE UPDATES**
 
 ---
 
