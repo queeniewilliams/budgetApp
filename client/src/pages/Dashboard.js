@@ -188,7 +188,8 @@ export default class Dashboard extends Component {
                 this.props.balance > 0 ? { color: 'green' } : { color: 'red' }
               }
             >
-              BALANCE: ${this.props.balance}
+              ${this.props.balance}
+              <br></br> BALANCE
             </h5>
             <div className="lists">
               <h6>Income</h6>
